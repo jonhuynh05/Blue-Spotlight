@@ -21,6 +21,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 // HOME ROUTE
 
 app.get("/", (req, res) => {
+    console.log(req.session)
     res.render("home.ejs")
 })
 
@@ -48,10 +49,36 @@ app.post("/register", async (req, res) => {
         }
         else if(req.body.contractor === true){
             const password = req.body.password;
-            const passwordHash = 
-            Contractor.create(req.body);
-            req.session.username = req.body.username;
-
+            const passwordHash = bcrypt.hashSync(password, bcrypt.genSaltSync(10));
+            const contractorDbEntry = {};
+            contractorDbEntry.name = req.body.name;
+            contractorDbEntry.email = req.body.email;
+            contractorDbEntry.contractor = true;
+            contractorDbEntry.password = passwordHash;
+            contractorDbEntry.followerCount = 0;
+            contractorDbEntry.rating = 0;
+            const newContractor = await Contractor.create(contractorDbEntry);
+            console.log(newContractor)
+            req.session.name = newContractor.name;
+            req.session.logged = true;
+            req.session.duplicate = "";
+            res.redirect("/");
+        }
+        else{
+            const password = req.body.password;
+            const passwordHash = bcrypt.hashSync(password, bcrypt.genSaltSync(10));
+            const reviewerDbEntry = {};
+            reviewerDbEntry.name = req.body.name;
+            reviewerDbEntry.email = req.body.email;
+            reviewerDbEntry.contractor = true;
+            reviewerDbEntry.password = passwordHash;
+            reviewerDbEntry.followerCount = 0;
+            reviewerDbEntry.rating = 0;
+            const newReviewer = await Reviewer.create(reviewerDbEntry);
+            console.log(newReviewer)
+            req.session.name = newReviewer.name;
+            req.session.logged = true;
+            req.session.duplicate = "";
             res.redirect("/");
         }
     }
