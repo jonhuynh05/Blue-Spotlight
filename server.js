@@ -21,6 +21,11 @@ app.get("/", (req, res) => {
     res.render("home.ejs")
 })
 
+// LOGIN ROUTE
+
+app.get("/login", (req, res) => {
+    res.render("login.ejs")
+})
 
 
 app.listen(PORT, ()=> {
