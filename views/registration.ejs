@@ -1,0 +1,15 @@
+<%- include("./partials/header.ejs") %>
+<div class="container-fluid">
+    <h1>Register</h1>
+    <form id="register-form" action="/register" method="POST">
+        Name:<input type="text" name="username"/>
+        Email:<input type="text" name="email"/>
+        Account Type:<select name="contractor">
+                <option value="true">Contractor</option>
+                <option value="false">Reviewer</option>
+            </select>
+        Password:<input type="password" name="password"/>
+        <button type="submit">Submit</button>
+    </form>
+</div>
+<%- include("./partials/footer.ejs") %>

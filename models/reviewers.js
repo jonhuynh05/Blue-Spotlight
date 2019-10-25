@@ -4,6 +4,7 @@ const reviewerSchema = new mongoose.Schema({
     email: {type: String, required: true, unique: true},
     password: {type: String, required: true},
     reviewCount: Number,
+    contractor: Boolean,
     reviews: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: "Review"
