@@ -15,6 +15,14 @@ app.use(session({
 app.use(methodOverride("_method"));
 app.use(bodyParser.urlencoded({extended: true}));
 
+// HOME ROUTE
+
+app.get("/", (req, res) => {
+    res.render("home.ejs")
+})
+
+
+
 app.listen(PORT, ()=> {
     console.log(`Listening on ${PORT}.`)
 });
