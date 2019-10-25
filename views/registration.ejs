@@ -1,5 +1,6 @@
 <%- include("./partials/header.ejs") %>
 <div class="container-fluid">
+    <a href="/" class="home-link">Contractor Ratings</a>
     <h1>Register</h1>
     <form id="register-form" action="/register" method="POST">
         Name:<input type="text" name="username"/>
@@ -10,6 +11,7 @@
             </select>
         Password:<input type="password" name="password"/>
         <button type="submit">Submit</button>
+        <%= duplicate %>
     </form>
 </div>
 <%- include("./partials/footer.ejs") %>
