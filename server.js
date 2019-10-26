@@ -5,6 +5,7 @@ const bodyParser = require("body-parser");
 const session = require("express-session");
 const Contractor = require("./models/contractors");
 const Reviewer = require("./models/reviewers");
+const contractorController = require("./controller/contractor");
 const bcrypt = require("bcryptjs");
 const PORT = 5000;
 require("./db/db")
@@ -17,6 +18,7 @@ app.use(session({
 }))
 app.use(methodOverride("_method"));
 app.use(bodyParser.urlencoded({extended: true}));
+app.use("/contractors", contractorController);
 
 // HOME ROUTE
 
@@ -28,7 +30,49 @@ app.get("/", (req, res) => {
 // LOGIN ROUTE
 
 app.get("/login", (req, res) => {
-    res.render("login.ejs")
+    res.render("login.ejs", {
+        incorrectlogin: req.session.incorrectlogin
+    })
+})
+
+app.post("/login", async (req, res) => {
+    try{
+        const foundContractor = await Contractor.findOne({email: req.body.email});
+        const foundReviewer = await Reviewer.findOne({email: req.body.email});
+        if(foundContractor){
+            if(bcrypt.compareSync(req.body.password, foundContractor.password)){
+                req.session.name = foundContractor.name;
+                req.session.logged = true;
+                req.session.incorrectlogin = ""
+                res.redirect("/contractors")
+            }
+            else{
+                req.session.incorrectlogin = "Username or password is incorrect."
+                res.redirect("/login")
+            }
+
+        }
+        else if(foundReviewer){
+            if(bcrypt.compareSync(req.body.password, foundReviewer.password)){
+                req.session.name = foundReviewer.name;
+                req.session.logged = true;
+                req.session.incorrectlogin = ""
+                res.redirect("/")
+            }
+            else{
+                req.session.incorrectlogin = "Username or password is incorrect."
+                res.redirect("/login")
+            }
+        }
+        else{
+            req.session.incorrectlogin = "Username or password is incorrect."
+            res.redirect("/login")
+        }
+    }
+    catch(err){
+        res.send(err)
+        console.log(err)
+    }
 })
 
 // REGISTER ROUTE
@@ -62,7 +106,7 @@ app.post("/register", async (req, res) => {
             req.session.name = newContractor.name;
             req.session.logged = true;
             req.session.duplicate = "";
-            res.redirect("/");
+            res.redirect("/contractors");
         }
         else{
             const password = req.body.password;

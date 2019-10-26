@@ -1,0 +1,19 @@
+<%- include("./partials/header.ejs") %>
+<div class="container-fluid">
+    <a href="/" class="home-link">Contractor Ratings</a>
+    <div class="row" id="name-container">
+        <h1>Hello, <%=contractor.name%>. </h1>
+    </div>
+    <div class="row" id="profile-photo-container">
+        <img src="" alt="" id="profile-photo">
+    </div>
+    <div class="row" id="stats-container">
+
+    </div>
+    <div class="row" id="edit-button-container">
+        <div id="edit-anchor-container">
+            <a href="/contractors/edit" class="edit-button"></a>
+        </div>
+    </div>
+</div>
+<%- include("./partials/footer.ejs") %>
