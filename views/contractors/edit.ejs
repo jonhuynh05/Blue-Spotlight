@@ -1,0 +1,15 @@
+<%- include("../partials/header.ejs") %>
+<div class="container-fluid">
+    <a href="/" class="home-link">Contractor Ratings</a>
+    <h1>Edit Profile</h1>
+    <form id="edit-form" action="/contractors/edit?_method=PUT" method="POST">
+        Name:<input type="text" name="name" value="<%=contractor.name%>"/>
+        Username:<input type="text" name="username" value="<%=contractor.username%>"/>
+        Email:<input type="text" name="email" value="<%=contractor.email%>"/>
+        New Password:<input type="text" name="password"/>
+        Phone Number:<input type="text" name="phoneNumber" value="<%=contractor.phoneNumber%>"/>
+        <button type="submit">Submit</button>
+        <%= duplicate %>
+    </form>
+</div>
+<%- include("../partials/footer.ejs") %>

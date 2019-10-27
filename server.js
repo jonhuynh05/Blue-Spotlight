@@ -37,7 +37,7 @@ app.get("/login", (req, res) => {
 
 app.post("/login", async (req, res) => {
     try{
-        const foundContractor = await Contractor.findOne({email: req.body.email});
+        const foundContractor = await Contractor.findOne({username: req.body.username});
         const foundReviewer = await Reviewer.findOne({email: req.body.email});
         if(foundContractor){
             if(bcrypt.compareSync(req.body.password, foundContractor.password)){
@@ -88,12 +88,6 @@ app.get("/register", (req, res) => {
 app.post("/register", async (req, res) => {
     console.log(req.body.contractor);
     console.log(typeof(req.body.contractor))
-    // if(req.body.contractor = "yes"){
-    //     req.body.contractor = true
-    // }
-    // else if(req.body.contractor = "no"){
-    //     req.body.contractor = false
-    // }
     try{
         console.log(req.body.contractor);
         console.log(typeof(req.body.contractor))
