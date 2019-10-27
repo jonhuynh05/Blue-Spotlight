@@ -1,0 +1,19 @@
+<%- include("../partials/header.ejs") %>
+<div class="container-fluid">
+    <a href="/" class="home-link">Contractor Ratings</a>
+    <div class="row" id="name-container">
+        <h1>Hello, <%=reviewer.name%>. </h1>
+    </div>
+    <div class="row" id="profile-photo-container">
+        <img src="" alt="" id="profile-photo">
+    </div>
+    <div class="row" id="stats-container">
+        <p><%=reviewer.rating%></p>
+    </div>
+    <div class="row" id="edit-button-container">
+        <div id="edit-anchor-container">
+            <a href="/reviewers/<%=reviewer._id%>/edit" class="edit-button">Edit Profile</a>
+        </div>
+    </div>
+</div>
+<%- include("../partials/footer.ejs") %>

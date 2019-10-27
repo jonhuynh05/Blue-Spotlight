@@ -6,6 +6,7 @@ const session = require("express-session");
 const Contractor = require("./models/contractors");
 const Reviewer = require("./models/reviewers");
 const contractorController = require("./controller/contractor");
+const reviewerController = require("./controller/reviewer");
 const bcrypt = require("bcryptjs");
 const PORT = 5000;
 require("./db/db")
@@ -19,6 +20,7 @@ app.use(session({
 app.use(methodOverride("_method"));
 app.use(bodyParser.urlencoded({extended: true}));
 app.use("/contractors", contractorController);
+app.use("/reviewers", reviewerController);
 
 // HOME ROUTE
 
@@ -38,7 +40,7 @@ app.get("/login", (req, res) => {
 app.post("/login", async (req, res) => {
     try{
         const foundContractor = await Contractor.findOne({username: req.body.username});
-        const foundReviewer = await Reviewer.findOne({email: req.body.email});
+        const foundReviewer = await Reviewer.findOne({username: req.body.username});
         if(foundContractor){
             if(bcrypt.compareSync(req.body.password, foundContractor.password)){
                 req.session.username = foundContractor.username;
@@ -51,7 +53,6 @@ app.post("/login", async (req, res) => {
                 req.session.incorrectlogin = "Username or password is incorrect."
                 res.redirect("/login")
             }
-
         }
         else if(foundReviewer){
             if(bcrypt.compareSync(req.body.password, foundReviewer.password)){
@@ -59,7 +60,7 @@ app.post("/login", async (req, res) => {
                 req.session.name = foundReviewer.name;
                 req.session.logged = true;
                 req.session.incorrectlogin = ""
-                res.redirect("/")
+                res.redirect("/reviewers")
             }
             else{
                 req.session.incorrectlogin = "Username or password is incorrect."
@@ -140,7 +141,7 @@ app.post("/register", async (req, res) => {
             req.session.name = newReviewer.name;
             req.session.logged = true;
             req.session.duplicate = "";
-            res.redirect("/");
+            res.redirect("/reviewers");
         }
     }
     catch (err) {

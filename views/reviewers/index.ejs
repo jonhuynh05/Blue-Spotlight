@@ -1,0 +1,13 @@
+<%- include("../partials/header.ejs") %>
+<div class="container-fluid">
+    <a href="/" class="home-link">Contractor Ratings</a>
+    <h1>Reviewers</h1>
+    <p>Contractor Ratings - where contractors can add their profiles for market exposure, and where people can help each other find the right contractor.</p>
+    <p>Your profile is on Contractor Ratings. Find your contractor and let us know what you think about them.</p>
+    <div class="row" id="profile-button-container">
+        <div id="profile-anchor-container">
+            <a href="/reviewers/<%=reviewer._id%>" class="profile-button">See Profile</a>
+        </div>
+    </div>
+</div>
+<%- include("../partials/footer.ejs") %>
