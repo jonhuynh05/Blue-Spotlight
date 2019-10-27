@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const Contractor = require("../models/contractors")
+const Contractor = require("../models/contractors");
+const bcrypt = require("bcryptjs");
 
 router.get("/", async (req, res) => {
     try{
@@ -44,40 +45,73 @@ router.get("/:id/edit", async (req, res) => {
     }
 })
 
-// router.put("/", async (req, res) => {
-//     try{
-//         const foundContractorEmail = await Contractor.findOne({email: req.body.email});
-//         const foundContractorUsername = await Contractor.findOne({email: req.body.username});
-//         if(foundContractorUsername){
-//             req.session.duplicate = "Username already exists. Please try another.";
-//             res.redirect("/contractors/edit");
-//         }
-//         else if(foundContractorEmail){
-//             req.session.duplicate = "Email already exists. Please try another.";
-//             res.redirect("/contractors/edit");
-//         }
-//         else {
-//             const password = req.body.password;
-//             const passwordHash = bcrypt.hashSync(password, bcrypt.genSaltSync(10));
-//             const contractorDbEntry = {};
-//             contractorDbEntry.name = req.body.name;
-//             contractorDbEntry.username = req.body.username;
-//             contractorDbEntry.email = req.body.email;
-//             contractorDbEntry.password = passwordHash;
-//             contractorDbEntry.phoneNumber = req.body.phoneNumber
-//             const updatedContractor = await Contractor.findOneAndUpdate({username: req.session.username}, contractorDbEntry, {new: true});
-//             req.session.username = updatedContractor.username;
-//             req.session.name = updatedContractor.name;
-//             req.session.duplicate = "";
-//             console.log(updatedContractor)
-//             console.log(req.session)
-//             res.redirect("/contractors");
-//         }
-//     }
-//     catch (err) {
-//         res.send(err)
-//         console.log(err)
-//     }
-// })
+router.put("/:id", async (req, res) => {
+    try{
+        const loggedInContractor = await Contractor.findOne({email: req.session.username});
+        const foundContractorUsername = await Contractor.findOne({email: req.body.username});
+        const foundContractorEmail = await Contractor.findOne({email: req.body.email});
+        if(loggedInContractor.username !== req.body.username && foundContractorUsername){
+            req.session.duplicate = "Username already exists. Please try another.";
+            res.redirect("/contractors/:id/edit");
+        }
+        else if(loggedInContractor.email !== req.body.email && foundContractorEmail){
+            req.session.duplicate = "Email already exists. Please try another.";
+            res.redirect("/contractors/:id/edit");
+        }
+        else {
+            if(bcrypt.compareSync(req.body.password, loggedInContractor.password) === false){
+                if(req.body.password === ""){
+                    const contractorDbEntry = {};
+                    contractorDbEntry.name = req.body.name;
+                    contractorDbEntry.username = req.body.username;
+                    contractorDbEntry.email = req.body.email;
+                    contractorDbEntry.phoneNumber = req.body.phoneNumber
+                    const updatedContractor = await Contractor.findOneAndUpdate({username: req.session.username}, contractorDbEntry, {new: true});
+                    req.session.username = updatedContractor.username;
+                    req.session.name = updatedContractor.name;
+                    req.session.duplicate = "";
+                    console.log(updatedContractor)
+                    console.log(req.session)
+                    res.redirect("/contractors");
+                }
+                else{
+                    const newPassword = req.body.password;
+                    const passwordHash = bcrypt.hashSync(newPassword, bcrypt.genSaltSync(10));
+                    const contractorDbEntry = {};
+                    contractorDbEntry.name = req.body.name;
+                    contractorDbEntry.username = req.body.username;
+                    contractorDbEntry.email = req.body.email;
+                    contractorDbEntry.password = passwordHash;
+                    contractorDbEntry.phoneNumber = req.body.phoneNumber
+                    const updatedContractor = await Contractor.findOneAndUpdate({username: req.session.username}, contractorDbEntry, {new: true});
+                    req.session.username = updatedContractor.username;
+                    req.session.name = updatedContractor.name;
+                    req.session.duplicate = "";
+                    console.log(updatedContractor)
+                    console.log(req.session)
+                    res.redirect("/contractors");
+                }
+            }
+            else{
+                const contractorDbEntry = {};
+                contractorDbEntry.name = req.body.name;
+                contractorDbEntry.username = req.body.username;
+                contractorDbEntry.email = req.body.email;
+                contractorDbEntry.phoneNumber = req.body.phoneNumber
+                const updatedContractor = await Contractor.findOneAndUpdate({username: req.session.username}, contractorDbEntry, {new: true});
+                req.session.username = updatedContractor.username;
+                req.session.name = updatedContractor.name;
+                req.session.duplicate = "";
+                console.log(updatedContractor)
+                console.log(req.session)
+                res.redirect("/contractors");
+            }
+        }
+    }
+    catch (err) {
+        res.send(err)
+        console.log(err)
+    }
+})
 
 module.exports = router;
