@@ -47,8 +47,8 @@ router.get("/:id/edit", async (req, res) => {
 
 router.put("/:id", async (req, res) => {
     try{
-        const loggedInContractor = await Contractor.findOne({email: req.session.username});
-        const foundContractorUsername = await Contractor.findOne({email: req.body.username});
+        const loggedInContractor = await Contractor.findOne({username: req.session.username});
+        const foundContractorUsername = await Contractor.findOne({username: req.body.username});
         const foundContractorEmail = await Contractor.findOne({email: req.body.email});
         if(loggedInContractor.username !== req.body.username && foundContractorUsername){
             req.session.duplicate = "Username already exists. Please try another.";
@@ -107,6 +107,23 @@ router.put("/:id", async (req, res) => {
                 res.redirect("/contractors");
             }
         }
+    }
+    catch (err) {
+        res.send(err)
+        console.log(err)
+    }
+})
+
+router.delete("/:id", async (req, res) => {
+    try{
+        const contractorToBeDeleted = await Contractor.findOne({username: req.session.username})
+
+
+        //*****MAKE SURE TO REMOVE REVIEW FROM USER*****
+
+        const deletedContractor = await Contractor.findOneAndDelete({username: req.session.username})
+        req.session.destroy()
+        res.redirect("/")
     }
     catch (err) {
         res.send(err)
