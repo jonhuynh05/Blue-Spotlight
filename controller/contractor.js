@@ -4,8 +4,10 @@ const Contractor = require("../models/contractors")
 
 router.get("/", async (req, res) => {
     try{
+        console.log(req.session)
+        const foundContractor = await Contractor.findOne({username: req.session.username});
         res.render("contractors/index.ejs", {
-            contractor: Contractor
+            contractor: foundContractor
         })
     }
     catch(err){

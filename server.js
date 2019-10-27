@@ -121,11 +121,13 @@ app.post("/register", async (req, res) => {
             contractorDbEntry.followerCount = 0;
             contractorDbEntry.rating = 0;
             const newContractor = await Contractor.create(contractorDbEntry);
-            console.log(newContractor)
+            req.session.userId = newContractor._id;
             req.session.username = newContractor.username;
             req.session.name = newContractor.name;
             req.session.logged = true;
             req.session.duplicate = "";
+            console.log(newContractor)
+            console.log(req.session)
             res.redirect("/contractors");
         }
         else{
