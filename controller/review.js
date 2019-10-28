@@ -20,7 +20,20 @@ router.get("/", async (req, res) => {
 router.get("/:id", async (req, res) => {
     try{
         const searchedContractor = await Contractor.findById(req.params.id);
-        res.render("reviews/contractor-reviews.ejs", {
+        res.render("reviews/contractorReviews.ejs", {
+            contractor: searchedContractor
+        })
+    }
+    catch(err){
+        res.send(err);
+        console.log(err);
+    }
+})
+
+router.get("/:id/writereview", async (req, res) => {
+    try{
+        const searchedContractor = await Contractor.findById(req.params.id);
+        res.render("reviews/writeReview.ejs", {
             contractor: searchedContractor
         })
     }
