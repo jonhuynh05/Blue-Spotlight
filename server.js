@@ -7,6 +7,7 @@ const Contractor = require("./models/contractors");
 const Reviewer = require("./models/reviewers");
 const contractorController = require("./controller/contractor");
 const reviewerController = require("./controller/reviewer");
+const reviewController = require("./controller/review");
 const bcrypt = require("bcryptjs");
 const PORT = 5000;
 require("./db/db")
@@ -21,6 +22,7 @@ app.use(methodOverride("_method"));
 app.use(bodyParser.urlencoded({extended: true}));
 app.use("/contractors", contractorController);
 app.use("/reviewers", reviewerController);
+app.use("/reviews", reviewController);
 
 // HOME ROUTE
 
