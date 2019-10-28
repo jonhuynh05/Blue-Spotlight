@@ -23,11 +23,17 @@ router.get("/contractors/:id", async (req, res) => {
         const searchedContractor = await Contractor.findById(req.params.id);
         const contractorReviews = [];
         const ratingArr = [];
+        const authors = [];
         for(let i = 0; i < searchedContractor.reviews.length; i++){
             let foundReview = await Review.findById(searchedContractor.reviews[i]);
+            console.log(foundReview+"***THIS IS THE REVIEW***")
+            let foundAuthor = await Reviewer.findOne({username: foundReview.authorUsername});
+            console.log(foundAuthor+"<<<<THIS IS THE AUTHOR>>>>")
             ratingArr.push(foundReview.rating);
+            authors.push(foundAuthor);
             contractorReviews.push(foundReview);
         }
+        // console.log(authors+"<<<<<")
         const avgRating = ratingArr.reduce( function (a, b) {
             return a + b
         }, 0)/ratingArr.length;
@@ -35,7 +41,8 @@ router.get("/contractors/:id", async (req, res) => {
         await searchedContractor.save();
         res.render("reviews/contractorReviews.ejs", {
             contractor: searchedContractor,
-            foundReviews: contractorReviews
+            foundReviews: contractorReviews,
+            reviewer: authors
         })
     }
     catch(err){
