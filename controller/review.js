@@ -22,13 +22,17 @@ router.get("/:id", async (req, res) => {
     try{
         const searchedContractor = await Contractor.findById(req.params.id);
         const contractorReviews = [];
+        const ratingArr = [];
         for(let i = 0; i < searchedContractor.reviews.length; i++){
             let foundReview = await Review.findById(searchedContractor.reviews[i]);
-            console.log(foundReview)
+            ratingArr.push(foundReview.rating);
             contractorReviews.push(foundReview);
-            console.log(contractorReviews)
         }
-        console.log(contractorReviews)
+        const avgRating = ratingArr.reduce( function (a, b) {
+            return a + b
+        }, 0)/ratingArr.length;
+        searchedContractor.rating = avgRating;
+        await searchedContractor.save();
         res.render("reviews/contractorReviews.ejs", {
             contractor: searchedContractor,
             foundReviews: contractorReviews
