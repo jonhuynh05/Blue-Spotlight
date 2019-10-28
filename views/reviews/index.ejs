@@ -5,11 +5,11 @@
     <div class="row">
     <%for (let i = 0; i < contractors.length; i++) {%>
         <div class="col" id="contractors-container">
-            <a href="/reviews/<%=contractors[i]._id%>"><%=contractors[i].name%></a>
+            <a href="/reviews/contractors/<%=contractors[i]._id%>"><%=contractors[i].name%></a>
         </div>
         <div class="col" id="edit-button-container">
             <div id="edit-anchor-container">
-                <a href="/reviews/<%=contractors[i]._id%>/writereview" class="edit-button">Write A Review</a>
+                <a href="/reviews/contractors/<%=contractors[i]._id%>/writereview" class="edit-button">Write A Review</a>
             </div>
         </div>
     <%}%>

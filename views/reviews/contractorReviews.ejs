@@ -14,6 +14,7 @@
         <%for (let i = 0; i < contractor.reviews.length; i++){%>
             <%=foundReviews[i].rating%><br/>
             <%=foundReviews[i].description%><br/>
+            <a href="">-- <%=foundReviews[i].authorName%></a><br/>
         <%}%>
     </div>
     <div class="row" id="review-button-container">

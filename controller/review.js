@@ -18,7 +18,7 @@ router.get("/", async (req, res) => {
     }
 })
 
-router.get("/:id", async (req, res) => {
+router.get("/contractors/:id", async (req, res) => {
     try{
         const searchedContractor = await Contractor.findById(req.params.id);
         const contractorReviews = [];
@@ -44,7 +44,7 @@ router.get("/:id", async (req, res) => {
     }
 })
 
-router.get("/:id/writereview", async (req, res) => {
+router.get("/contractors/:id/writereview", async (req, res) => {
     try{
         const searchedContractor = await Contractor.findById(req.params.id);
         const loggedContractor = await Contractor.findOne({username: req.session.username});
@@ -68,7 +68,7 @@ router.get("/:id/writereview", async (req, res) => {
     }
 })
 
-router.post("/:id", async (req, res) => {
+router.post("/contractors/:id", async (req, res) => {
     try{
         console.log(req.body)
         const loggedContractor = await Contractor.findOne({username: req.session.username});
@@ -85,7 +85,7 @@ router.post("/:id", async (req, res) => {
             await loggedContractor.save();
             reviewedContractor.reviews.push(newReview);
             await reviewedContractor.save();
-            res.redirect("/reviews/" + reviewedContractor._id);
+            res.redirect("/reviews/contractors/" + reviewedContractor._id);
             console.log(newReview)
         }
         else{
@@ -94,7 +94,7 @@ router.post("/:id", async (req, res) => {
             await loggedReviewer.save();
             reviewedContractor.reviews.push(newReview);
             await reviewedContractor.save();
-            res.redirect("/reviews/" + reviewedContractor._id);
+            res.redirect("/reviews/contractors/" + reviewedContractor._id);
             console.log(newReview)
 
         }

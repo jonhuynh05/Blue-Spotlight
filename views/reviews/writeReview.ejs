@@ -3,7 +3,7 @@
     <a href="/" class="home-link">Contractor Ratings</a>
     <h1><%=contractor.name%></h1>
     <h1>Write A Review</h1>
-    <form id="review-form" action="/reviews/<%=contractor._id%>" method="POST">
+    <form id="review-form" action="/reviews/contractors/<%=contractor._id%>" method="POST">
         <div class="hidden-info">
             <input name="subjectName" value="<%=contractor.name%>">
             <input name="subjectUsername" value="<%=contractor.username%>">
