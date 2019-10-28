@@ -69,7 +69,7 @@ router.post("/:id", async (req, res) => {
             await loggedContractor.save();
             reviewedContractor.reviews.push(newReview);
             await reviewedContractor.save();
-            res.redirect("/reviews/:id");
+            res.redirect("/reviews/" + reviewedContractor._id);
         }
         else{
             req.session.selfReviewMsg = "";
@@ -77,7 +77,7 @@ router.post("/:id", async (req, res) => {
             await loggedReviewer.save();
             reviewedContractor.reviews.push(newReview);
             await reviewedContractor.save();
-            res.redirect("/reviews/:id");
+            res.redirect("/reviews/" + reviewedContractor._id);
         }
     }
     catch(err){

@@ -4,7 +4,7 @@
     <h1><%=contractor.name%></h1>
     <h1>Write A Review</h1>
     <form id="review-form" action="/reviews/<%=contractor._id%>" method="POST">
-        <select name="rating">
+        <select name="rating" required>
             <option value="" selected></option>
             <option value="5">5</option>
             <option value="4">4</option>
