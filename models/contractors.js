@@ -11,7 +11,11 @@ const contractorSchema = new mongoose.Schema({
     reviews: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: "Review"
-    }]
+    }],
+    writtenReviews: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Review"
+    }],
 });
 
 const Contractor = mongoose.model("Contractor", contractorSchema);

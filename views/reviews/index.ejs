@@ -1,15 +1,19 @@
 <%- include("../partials/header.ejs") %>
 <div class="container-fluid">
+    <a href="/" class="home-link">Contractor Ratings</a>
     <h1>Reviews</h1>
     <div class="row">
     <%for (let i = 0; i < contractors.length; i++) {%>
-        <a href="/reviews/<%=contractors[i]._id%>"><%=contractors[i].name%></a><br/>
-        <div class="row" id="edit-button-container">
+        <div class="col" id="contractors-container">
+            <a href="/reviews/<%=contractors[i]._id%>"><%=contractors[i].name%></a>
+        </div>
+        <div class="col" id="edit-button-container">
             <div id="edit-anchor-container">
                 <a href="/reviews/<%=contractors[i]._id%>/writereview" class="edit-button">Write A Review</a>
             </div>
         </div>
     <%}%>
     </div>
+    <%= selfReviewMsg %>
 </div>
 <%- include("../partials/footer.ejs") %>

@@ -6,7 +6,7 @@ const reviewerSchema = new mongoose.Schema({
     password: {type: String, required: true},
     reviewCount: Number,
     contractor: Boolean,
-    reviews: [{
+    writtenReviews: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: "Review"
     }]
