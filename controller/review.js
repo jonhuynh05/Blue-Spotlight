@@ -21,8 +21,17 @@ router.get("/", async (req, res) => {
 router.get("/:id", async (req, res) => {
     try{
         const searchedContractor = await Contractor.findById(req.params.id);
+        const contractorReviews = [];
+        for(let i = 0; i < searchedContractor.reviews.length; i++){
+            let foundReview = await Review.findById(searchedContractor.reviews[i]);
+            console.log(foundReview)
+            contractorReviews.push(foundReview);
+            console.log(contractorReviews)
+        }
+        console.log(contractorReviews)
         res.render("reviews/contractorReviews.ejs", {
-            contractor: searchedContractor
+            contractor: searchedContractor,
+            foundReviews: contractorReviews
         })
     }
     catch(err){
@@ -60,7 +69,7 @@ router.post("/:id", async (req, res) => {
             await loggedContractor.save();
             reviewedContractor.reviews.push(newReview);
             await reviewedContractor.save();
-            res.redirect("reviews/:id");
+            res.redirect("/reviews/:id");
         }
         else{
             req.session.selfReviewMsg = "";
@@ -68,7 +77,7 @@ router.post("/:id", async (req, res) => {
             await loggedReviewer.save();
             reviewedContractor.reviews.push(newReview);
             await reviewedContractor.save();
-            res.redirect("reviews/:id");
+            res.redirect("/reviews/:id");
         }
     }
     catch(err){

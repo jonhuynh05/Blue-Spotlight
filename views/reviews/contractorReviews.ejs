@@ -10,5 +10,10 @@
     <div class="row" id="stats-container">
         <p><%=contractor.rating%></p>
     </div>
+    <div>
+        <%for (let i = 0; i < contractor.reviews.length; i++){%>
+            <%=foundReviews[i].rating%><br/>
+        <%}%>
+    </div>
 </div>
 <%- include("../partials/footer.ejs") %>
