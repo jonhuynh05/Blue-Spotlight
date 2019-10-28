@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Contractor = require("../models/contractors");
+const Reviewer = require("../models/reviewers");
 const bcrypt = require("bcryptjs");
 
 router.get("/", async (req, res) => {
@@ -50,11 +51,13 @@ router.put("/:id", async (req, res) => {
         const loggedInContractor = await Contractor.findOne({username: req.session.username});
         const foundContractorUsername = await Contractor.findOne({username: req.body.username});
         const foundContractorEmail = await Contractor.findOne({email: req.body.email});
-        if(loggedInContractor.username !== req.body.username && foundContractorUsername){
+        const foundReviewerUsername = await Reviewer.findOne({username: req.body.username});
+        const foundReviewerEmail = await Reviewer.findOne({email: req.body.email});
+        if(loggedInContractor.username !== req.body.username && (foundContractorUsername || foundReviewerUsername)){
             req.session.duplicate = "Username already exists. Please try another.";
             res.redirect("/contractors/:id/edit");
         }
-        else if(loggedInContractor.email !== req.body.email && foundContractorEmail){
+        else if(loggedInContractor.email !== req.body.email && (foundContractorEmail || foundReviewerEmail)){
             req.session.duplicate = "Email already exists. Please try another.";
             res.redirect("/contractors/:id/edit");
         }
