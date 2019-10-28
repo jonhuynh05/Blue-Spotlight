@@ -124,9 +124,9 @@ router.delete("/:id", async (req, res) => {
 
         //*****MAKE SURE TO REMOVE REVIEW FROM USER*****
 
-        const deletedContractor = await Contractor.findOneAndDelete({username: req.session.username})
-        req.session.destroy()
-        res.redirect("/")
+        const deletedContractor = await Contractor.findOneAndDelete({username: req.session.username});
+        req.session.destroy();
+        res.redirect("/");
     }
     catch (err) {
         res.send(err)

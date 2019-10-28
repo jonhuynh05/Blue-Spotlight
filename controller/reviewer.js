@@ -113,4 +113,20 @@ router.put("/:id",  async (req, res) =>{
     }
 })
 
+router.delete("/:id", async (req, res) => {
+    try{
+        const reviewerToBeDeleted = await Reviewer.findOne({username: req.session.username});
+
+        //*****MAKE SURE TO REMOVE REVIEW FROM CONTRACTOR*****
+
+        const deletedReviewer = await Reviewer.findOneAndDelete({username: req.session.username});
+        req.session.destroy();
+        res.redirect("/");
+    }
+    catch(err) {
+        res.send(err)
+        console.log(err)
+    }
+})
+
 module.exports = router;
