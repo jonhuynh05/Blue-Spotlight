@@ -5,10 +5,8 @@
         <h1>Your Reviews</h1>
     </div>
     <div>
-        <%for (let i = 0; i < contractor.reviews.length; i++){%>
-        <div class="row" id="stats-container">
-            <p><%=reviewedContractors[i].name%></p>
-        </div>
+        <%for (let i = 0; i < contractor.writtenReviews.length; i++){%>
+            <%=foundReviews[i].subjectName%><br/>
             <%=foundReviews[i].rating%><br/>
             <%=foundReviews[i].description%><br/>
         <%}%>

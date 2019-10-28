@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const Contractor = require("../models/contractors");
 const Reviewer = require("../models/reviewers");
+const Review = require("../models/reviews")
 const bcrypt = require("bcryptjs");
 
 router.get("/", async (req, res) => {
@@ -35,22 +36,17 @@ router.get("/:id/written-reviews", async (req, res) => {
     try{
         const loggedInContractor = await Contractor.findOne({username: req.session.username});
         const reviewsArr = [];
-        const reviewedContractorNames = [];
         for (let i = 0; i < loggedInContractor.writtenReviews.length; i++){
-            reviewsArr.push(loggedInContractor.writtenReviews[i]);
-            console.log((reviewsArr[i]).toString()+"<<<<<<<<")
-            let reviewedContractors = await Contractor.findById((reviewsArr[i]).toString());
-            console.log(reviewedContractors)
-            reviewedContractorNames.push(reviewedContractors.name)
+            let foundReview = await Review.findById(loggedInContractor.writtenReviews[i]);
+            console.log(foundReview)
+            reviewsArr.push(foundReview);
         }
         console.log(loggedInContractor)
         console.log(reviewsArr)
-        console.log(reviewedContractorNames)
 
         res.render("contractors/writtenReviews.ejs", {
             contractor: loggedInContractor,
             foundReviews: reviewsArr,
-            reviewedContractors: reviewedContractorNames
         })
     }
     catch(err){
