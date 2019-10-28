@@ -20,7 +20,7 @@ router.get("/", async (req, res) => {
 
 router.get("/:id", async (req, res) => {
     try{
-        const foundContractor = await Contractor.findOne({username: req.session.username})
+        const foundContractor = await Contractor.findOne({username: req.session.username});
         res.render("contractors/show.ejs", {
             contractor: foundContractor
         })
@@ -31,6 +31,33 @@ router.get("/:id", async (req, res) => {
     }
 })
 
+router.get("/:id/written-reviews", async (req, res) => {
+    try{
+        const loggedInContractor = await Contractor.findOne({username: req.session.username});
+        const reviewsArr = [];
+        const reviewedContractorNames = [];
+        for (let i = 0; i < loggedInContractor.writtenReviews.length; i++){
+            reviewsArr.push(loggedInContractor.writtenReviews[i]);
+            console.log((reviewsArr[i]).toString()+"<<<<<<<<")
+            let reviewedContractors = await Contractor.findById((reviewsArr[i]).toString());
+            console.log(reviewedContractors)
+            reviewedContractorNames.push(reviewedContractors.name)
+        }
+        console.log(loggedInContractor)
+        console.log(reviewsArr)
+        console.log(reviewedContractorNames)
+
+        res.render("contractors/writtenReviews.ejs", {
+            contractor: loggedInContractor,
+            foundReviews: reviewsArr,
+            reviewedContractors: reviewedContractorNames
+        })
+    }
+    catch(err){
+        res.send(err)
+        console.log(err)
+    }
+})
 
 router.get("/:id/edit", async (req, res) => {
     try{

@@ -46,7 +46,7 @@ app.post("/login", async (req, res) => {
         if(foundContractor){
             if(bcrypt.compareSync(req.body.password, foundContractor.password)){
                 req.session.username = foundContractor.username;
-                req.session.name = foundContractor.name;
+                req.session.type = "contractor";
                 req.session.logged = true;
                 req.session.incorrectlogin = ""
                 res.redirect("/contractors")
@@ -59,7 +59,7 @@ app.post("/login", async (req, res) => {
         else if(foundReviewer){
             if(bcrypt.compareSync(req.body.password, foundReviewer.password)){
                 req.session.username = foundReviewer.username;
-                req.session.name = foundReviewer.name;
+                req.session.type = "reviewer";
                 req.session.logged = true;
                 req.session.incorrectlogin = ""
                 res.redirect("/reviewers")
@@ -120,7 +120,7 @@ app.post("/register", async (req, res) => {
             const newContractor = await Contractor.create(contractorDbEntry);
             req.session.userId = newContractor._id;
             req.session.username = newContractor.username;
-            req.session.name = newContractor.name;
+            req.session.type = "contractor";
             req.session.logged = true;
             req.session.duplicate = "";
             console.log(newContractor)
@@ -140,7 +140,7 @@ app.post("/register", async (req, res) => {
             const newReviewer = await Reviewer.create(reviewerDbEntry);
             console.log(newReviewer)
             req.session.username = newReviewer.username;
-            req.session.name = newReviewer.name;
+            req.session.type = "reviewer";
             req.session.logged = true;
             req.session.duplicate = "";
             res.redirect("/reviewers");

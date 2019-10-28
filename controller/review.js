@@ -47,9 +47,20 @@ router.get("/:id", async (req, res) => {
 router.get("/:id/writereview", async (req, res) => {
     try{
         const searchedContractor = await Contractor.findById(req.params.id);
-        res.render("reviews/writeReview.ejs", {
-            contractor: searchedContractor
-        })
+        const loggedContractor = await Contractor.findOne({username: req.session.username});
+        const loggedReviewer = await Reviewer.findOne({username: req.session.username});
+        if(loggedContractor){
+            res.render("reviews/writeReview.ejs", {
+                contractor: searchedContractor,
+                reviewer: loggedContractor
+            })
+        }
+        else{
+            res.render("reviews/writeReview.ejs", {
+                contractor: searchedContractor,
+                reviewer: loggedReviewer
+            })
+        }
     }
     catch(err){
         res.send(err);
@@ -59,6 +70,7 @@ router.get("/:id/writereview", async (req, res) => {
 
 router.post("/:id", async (req, res) => {
     try{
+        console.log(req.body)
         const loggedContractor = await Contractor.findOne({username: req.session.username});
         const loggedReviewer = await Reviewer.findOne({username: req.session.username});
         const reviewedContractor = await Contractor.findById(req.params.id);
@@ -74,6 +86,7 @@ router.post("/:id", async (req, res) => {
             reviewedContractor.reviews.push(newReview);
             await reviewedContractor.save();
             res.redirect("/reviews/" + reviewedContractor._id);
+            console.log(newReview)
         }
         else{
             req.session.selfReviewMsg = "";
@@ -82,6 +95,8 @@ router.post("/:id", async (req, res) => {
             reviewedContractor.reviews.push(newReview);
             await reviewedContractor.save();
             res.redirect("/reviews/" + reviewedContractor._id);
+            console.log(newReview)
+
         }
     }
     catch(err){

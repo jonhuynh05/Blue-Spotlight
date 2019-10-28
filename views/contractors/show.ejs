@@ -8,11 +8,16 @@
         <img src="" alt="" id="profile-photo">
     </div>
     <div class="row" id="stats-container">
-        <p><%=contractor.rating%></p>
+        <p>Stars: <%=contractor.rating%></p>
     </div>
-    <div class="row" id="edit-button-container">
-        <div id="edit-anchor-container">
-            <a href="/contractors/<%=contractor._id%>/edit" class="edit-button">Edit Profile</a>
+    <div class="row" id="edit-profile-button-container">
+        <div id="edit-profile-anchor-container">
+            <a href="/contractors/<%=contractor._id%>/edit" class="edit-button" id="edit-profile-anchor">Edit Profile</a>
+        </div>
+    </div>
+    <div class="row" id="see-reviews-container">
+        <div id="see-reviews-anchor-container">
+            <a href="/contractors/<%=contractor._id%>/written-reviews" id="see-reviews-anchor">Your Submitted Reviews</a>
         </div>
     </div>
 </div>

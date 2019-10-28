@@ -5,3 +5,7 @@ textarea{
 h1{
     color: red;
 }
+.hidden-info{
+    display:none;
+    visibility: hidden;
+}
