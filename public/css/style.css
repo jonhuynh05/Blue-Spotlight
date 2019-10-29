@@ -1,3 +1,73 @@
+.container-fluid{
+    height: 100vh;
+    padding: 0 !important;
+    justify-content: center;
+}
+
+.home-container{
+    background-image: url("../images/workshop.jpg");
+    height: 100%;
+    background-size: cover;
+    justify-content: center;
+    text-align: center;
+    padding-top: 120px;
+}
+
+.row{
+    justify-content: center;
+}
+
+#home-row{
+    background-color: rgb(0, 73, 184);
+    width: 50%;
+    margin: 0 auto;
+}
+
+.home-link{
+    color: white;
+    text-decoration: none;
+    font-size: 50px;
+    font-weight: bolder;
+    font-family: 'Raleway', sans-serif;
+}
+
+#description-row{
+    background-color: rgba(0, 73, 184, 0.5);
+    width: 50%;
+    margin: 30px auto 0 auto;
+    padding: 20px;
+}
+
+#description{
+    text-align: center;
+    color: white;
+    margin: 0px;
+}
+
+.anchor-container{
+    margin: 20px;
+    padding-top: 7px;
+    height: 40px;
+    width: 85px;
+    background-color: white;
+}
+
+.anchor-button{
+    color:rgb(0, 73, 184);
+    text-decoration: none !important;
+    font-weight: bold;
+    font-family: 'Raleway', sans-serif;
+
+}
+
+
+
+
+
+
+
+
+
 textarea{
     width: 400px;
     height: 400px;
@@ -9,3 +79,4 @@ h1{
     display:none;
     visibility: hidden;
 }
+

@@ -1,11 +1,20 @@
 <%- include("./partials/header.ejs") %>
 <div class="container-fluid">
-    <a href="/" class="home-link">Contractor Ratings</a>
-    <div class="class" id="login-anchor-container">
-        <a href="/login" class="login-button">Login</a>
-    </div>
-    <div class="class" id="register-anchor-container">
-        <a href="/register" class="login-button">Register</a>
+    <div class="home-container">
+        <div class="row" id="home-row">
+            <a href="/" class="home-link">Blue Spotlight</a>
+        </div>
+        <div class="row" id="description-row">
+            <p id="description">Blue Spotlight is the meeting ground for contractors and those in need of work done at their home. Contractors can upload their profile to connect with the market, and the public can share their experiences to help find the best contractors out there.</p>
+        </div>
+        <div class="row" id="button-row">
+            <div class="anchor-container" id="login-anchor-container">
+                <a href="/login" class="anchor-button">Login</a>
+            </div>
+            <div class="anchor-container" id="register-anchor-container">
+                <a href="/register" class="anchor-button">Register</a>
+            </div>
+        </div>
     </div>
 </div>
 <%- include("./partials/footer.ejs") %>
