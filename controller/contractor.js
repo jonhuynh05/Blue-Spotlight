@@ -95,7 +95,8 @@ router.get("/:id/written-reviews/edit/:revid", isLoggedIn, async (req, res) => {
 
 router.get("/", (req, res) => {
     try{
-
+        req.session.destroy();
+        res.redirect("/")
     }
     catch(err){
         res.send(err);

@@ -99,6 +99,17 @@ router.get("/contractors/:id/writereview", isLoggedIn, async (req, res) => {
     }
 })
 
+router.get("/", (req, res) => {
+    try{
+        req.session.destroy();
+        res.redirect("/")
+    }
+    catch(err){
+        res.send(err);
+        console.log(err)
+    }
+})
+
 router.post("/contractors/:id", async (req, res) => {
     try{
         console.log(req.body)

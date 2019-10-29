@@ -55,6 +55,17 @@ router.get("/:id/edit", isLoggedIn, async (req, res) => {
     }
 })
 
+router.get("/", (req, res) => {
+    try{
+        req.session.destroy();
+        res.redirect("/")
+    }
+    catch(err){
+        res.send(err);
+        console.log(err)
+    }
+})
+
 router.put("/:id",  async (req, res) =>{
     try{
         const loggedInReviewer = await Reviewer.findOne({username: req.session.username});
