@@ -38,11 +38,8 @@ router.get("/:id/written-reviews", async (req, res) => {
         const reviewsArr = [];
         for (let i = 0; i < loggedInContractor.writtenReviews.length; i++){
             let foundReview = await Review.findById(loggedInContractor.writtenReviews[i]);
-            console.log(foundReview)
             reviewsArr.push(foundReview);
         }
-        console.log(loggedInContractor)
-        console.log(reviewsArr)
 
         res.render("contractors/writtenReviews.ejs", {
             contractor: loggedInContractor,
@@ -86,18 +83,17 @@ router.get("/:id/written-reviews/edit/:revid", async (req, res) => {
     }
 })
 
-// router.put("/:id/written-reviews", async (req, res) => {
-//     try{
-//         const loggedInContractor = await Contractor.findOne({username: req.session.username})
-//         res.render("contracts/editReviews.ejs", {
-//             contractor: loggedInContractor
-//         })
-//     }
-//     catch(err){
-//         res.send(err)
-//         console.log(err)
-//     }
-// })
+router.put("/:id/written-reviews/edit/:revid", async (req, res) => {
+    try{
+        const updatedReview = await Review.findByIdAndUpdate(req.params.revid,req.body, {new: true});
+        console.log(updatedReview)
+        res.redirect("/contractors/"+req.params.id+"/written-reviews")
+    }
+    catch(err){
+        res.send(err)
+        console.log(err)
+    }
+})
 
 router.put("/:id", async (req, res) => {
     try{
