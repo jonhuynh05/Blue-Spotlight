@@ -9,6 +9,11 @@
             <%=foundReviews[i].subjectName%><br/>
             <%=foundReviews[i].rating%><br/>
             <%=foundReviews[i].description%><br/>
+            <div class="row" id="edit-review-button-container">
+                <div id="edit-review-anchor-container">
+                    <a href="/contractors/<%=contractor._id%>/written-reviews/edit/<%=foundReviews[i]._id%>" class="edit-button" id="edit-review-anchor">Edit Review</a>
+                </div>
+            </div>
         <%}%>
     </div>
 </div>

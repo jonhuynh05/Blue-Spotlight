@@ -69,6 +69,36 @@ router.get("/:id/edit", async (req, res) => {
     }
 })
 
+router.get("/:id/written-reviews/edit/:revid", async (req, res) => {
+    try{
+        const loggedInContractor = await Contractor.findOne({username: req.session.username});
+        const foundReview = await Review.findById(req.params.revid);
+        console.log(loggedInContractor)
+        console.log(foundReview)
+        res.render("contractors/editReview.ejs", {
+            contractor: loggedInContractor,
+            review: foundReview
+        })
+    }
+    catch(err){
+        res.send(err)
+        console.log(err)
+    }
+})
+
+// router.put("/:id/written-reviews", async (req, res) => {
+//     try{
+//         const loggedInContractor = await Contractor.findOne({username: req.session.username})
+//         res.render("contracts/editReviews.ejs", {
+//             contractor: loggedInContractor
+//         })
+//     }
+//     catch(err){
+//         res.send(err)
+//         console.log(err)
+//     }
+// })
+
 router.put("/:id", async (req, res) => {
     try{
         const loggedInContractor = await Contractor.findOne({username: req.session.username});
