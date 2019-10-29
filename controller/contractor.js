@@ -15,7 +15,6 @@ const isLoggedIn = (req, res, next) => {
     }
 }
 
-
 router.get("/", isLoggedIn, async (req, res) => {
     try{
         console.log(req.session)
@@ -90,6 +89,16 @@ router.get("/:id/written-reviews/edit/:revid", isLoggedIn, async (req, res) => {
     }
     catch(err){
         res.send(err)
+        console.log(err)
+    }
+})
+
+router.get("/", (req, res) => {
+    try{
+
+    }
+    catch(err){
+        res.send(err);
         console.log(err)
     }
 })

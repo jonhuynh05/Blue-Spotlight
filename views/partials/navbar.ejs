@@ -1,0 +1,20 @@
+<nav class="navbar fixed-top navbar-light bg-light">
+    <a class="navbar-brand" href="/">Blue Spotlight</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarText">
+    <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+            <a class="nav-link" href="/contractors/<%=contractor._id%>">Profile</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/reviews">Find Contractors</a>
+        </li>
+        <li class="nav-item">
+            <form action="/" method="POST">
+                <button id="log-out-button" type="submit">Log Out</button>
+            </form>
+        </li>
+    </ul>
+</nav>
