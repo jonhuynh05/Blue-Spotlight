@@ -5,9 +5,15 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarText">
     <ul class="navbar-nav mr-auto">
-        <li class="nav-item">
+        <% if(accountType === "contractor") { %>
+        <li class="nav-item" id="contractor-nav-show">
             <a class="nav-link" href="/contractors/<%=contractor._id%>">Profile</a>
         </li>
+        <% } else if(accountType === "reviewer") {%>
+        <li class="nav-item" id="reviewer-nav-show">
+            <a class="nav-link" href="/reviewers/<%=reviewer._id%>">Profile</a>
+        </li>
+        <% } %>
         <li class="nav-item">
             <a class="nav-link" href="/reviews">Find Contractors</a>
         </li>

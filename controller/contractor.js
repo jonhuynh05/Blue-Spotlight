@@ -20,6 +20,7 @@ router.get("/", isLoggedIn, async (req, res) => {
         console.log(req.session)
         const foundContractor = await Contractor.findOne({username: req.session.username});
         res.render("contractors/index.ejs", {
+            accountType: req.session.type,
             contractor: foundContractor
         })
     }

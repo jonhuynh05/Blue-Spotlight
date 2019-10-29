@@ -248,11 +248,24 @@ select{
     color: rgb(51, 99, 172) !important;
 }
 
+#contractor-nav-none{
+    display: none;
+}
+
+#contractor-nav-show{
+}
+
+#reviewer-nav-none{
+    display: none;
+}
+
+#reviewer-nav-show{
+}
 
 
-
-
-
+/* <li class="nav-item" id="reviewer-nav">
+<a class="nav-link" href="/reviewers/<%=reviewer._id%>">Profile</a>
+</li> */
 
 
 textarea{
