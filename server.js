@@ -12,6 +12,9 @@ const bcrypt = require("bcryptjs");
 const PORT = 5000;
 require("./db/db")
 
+
+
+// app.use(isLoggedIn)
 app.use(express.static("public"));
 app.use(session({
     secret: "random string",
@@ -20,6 +23,7 @@ app.use(session({
 }))
 app.use(methodOverride("_method"));
 app.use(bodyParser.urlencoded({extended: true}));
+
 app.use("/contractors", contractorController);
 app.use("/reviewers", reviewerController);
 app.use("/reviews", reviewController);
@@ -35,7 +39,8 @@ app.get("/", (req, res) => {
 
 app.get("/login", (req, res) => {
     res.render("login.ejs", {
-        incorrectlogin: req.session.incorrectlogin
+        incorrectlogin: req.session.incorrectlogin,
+        mustlogin: req.session.mustlogin
     })
 })
 
@@ -49,6 +54,7 @@ app.post("/login", async (req, res) => {
                 req.session.type = "contractor";
                 req.session.logged = true;
                 req.session.incorrectlogin = ""
+                req.session.mustlogin = ""
                 res.redirect("/contractors")
             }
             else{
@@ -62,6 +68,7 @@ app.post("/login", async (req, res) => {
                 req.session.type = "reviewer";
                 req.session.logged = true;
                 req.session.incorrectlogin = ""
+                req.session.mustlogin = ""
                 res.redirect("/reviewers")
             }
             else{
@@ -123,6 +130,7 @@ app.post("/register", async (req, res) => {
             req.session.type = "contractor";
             req.session.logged = true;
             req.session.duplicate = "";
+            req.session.mustlogin = ""
             console.log(newContractor)
             console.log(req.session)
             res.redirect("/contractors");
@@ -143,6 +151,7 @@ app.post("/register", async (req, res) => {
             req.session.type = "reviewer";
             req.session.logged = true;
             req.session.duplicate = "";
+            req.session.mustlogin = ""
             res.redirect("/reviewers");
         }
     }

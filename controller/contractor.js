@@ -4,8 +4,19 @@ const Contractor = require("../models/contractors");
 const Reviewer = require("../models/reviewers");
 const Review = require("../models/reviews")
 const bcrypt = require("bcryptjs");
+const isLoggedIn = (req, res, next) => {
+    if(req.session.logged === true){
+        req.session.mustlogin = ""
+        next()
+    }
+    else{
+        req.session.mustlogin = "Please log in to access content."
+        res.redirect("/login")
+    }
+}
 
-router.get("/", async (req, res) => {
+
+router.get("/", isLoggedIn, async (req, res) => {
     try{
         console.log(req.session)
         const foundContractor = await Contractor.findOne({username: req.session.username});
@@ -19,7 +30,7 @@ router.get("/", async (req, res) => {
     }
 })
 
-router.get("/:id", async (req, res) => {
+router.get("/:id", isLoggedIn, async (req, res) => {
     try{
         const foundContractor = await Contractor.findOne({username: req.session.username});
         res.render("contractors/show.ejs", {
@@ -32,7 +43,7 @@ router.get("/:id", async (req, res) => {
     }
 })
 
-router.get("/:id/written-reviews", async (req, res) => {
+router.get("/:id/written-reviews", isLoggedIn, async (req, res) => {
     try{
         const loggedInContractor = await Contractor.findOne({username: req.session.username});
         const reviewsArr = [];
@@ -52,7 +63,7 @@ router.get("/:id/written-reviews", async (req, res) => {
     }
 })
 
-router.get("/:id/edit", async (req, res) => {
+router.get("/:id/edit", isLoggedIn, async (req, res) => {
     try{
         const foundContractor = await Contractor.findOne({username: req.session.username});
         res.render("contractors/edit.ejs", {
@@ -66,7 +77,7 @@ router.get("/:id/edit", async (req, res) => {
     }
 })
 
-router.get("/:id/written-reviews/edit/:revid", async (req, res) => {
+router.get("/:id/written-reviews/edit/:revid", isLoggedIn, async (req, res) => {
     try{
         const loggedInContractor = await Contractor.findOne({username: req.session.username});
         const foundReview = await Review.findById(req.params.revid);

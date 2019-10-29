@@ -3,8 +3,18 @@ const router = express.Router();
 const Reviewer = require("../models/reviewers");
 const Contractor = require("../models/contractors");
 const bcrypt = require("bcryptjs");
+const isLoggedIn = (req, res, next) => {
+    if(req.session.logged === true){
+        req.session.mustlogin = ""
+        next()
+    }
+    else{
+        req.session.mustlogin = "Please log in to access content."
+        res.redirect("/login")
+    }
+}
 
-router.get("/", async (req, res) => {
+router.get("/", isLoggedIn, async (req, res) => {
     try{
         console.log(req.session)
         const loggedInReviewer = await Reviewer.findOne({username: req.session.username});
@@ -18,7 +28,7 @@ router.get("/", async (req, res) => {
     }
 })
 
-router.get("/:id", async (req, res) => {
+router.get("/:id", isLoggedIn, async (req, res) => {
     try{
         const loggedInReviewer = await Reviewer.findOne({username: req.session.username});
         res.render("reviewers/show.ejs", {
@@ -31,7 +41,7 @@ router.get("/:id", async (req, res) => {
     }
 })
 
-router.get("/:id/edit", async (req, res) => {
+router.get("/:id/edit", isLoggedIn, async (req, res) => {
     try{
         const loggedInReviewer = await Reviewer.findOne({username: req.session.username});
         res.render("reviewers/edit.ejs", {

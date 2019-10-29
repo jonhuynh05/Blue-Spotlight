@@ -3,8 +3,18 @@ const router = express.Router();
 const Review = require("../models/reviews");
 const Contractor = require("../models/contractors");
 const Reviewer = require("../models/reviewers");
+const isLoggedIn = (req, res, next) => {
+    if(req.session.logged === true){
+        req.session.mustlogin = ""
+        next()
+    }
+    else{
+        req.session.mustlogin = "Please log in to access content."
+        res.redirect("/login")
+    }
+}
 
-router.get("/", async (req, res) => {
+router.get("/", isLoggedIn, async (req, res) => {
     try{
         const allContractors = await Contractor.find({});
         res.render("reviews/index.ejs", {
@@ -18,7 +28,7 @@ router.get("/", async (req, res) => {
     }
 })
 
-router.get("/contractors/:id", async (req, res) => {
+router.get("/contractors/:id", isLoggedIn, async (req, res) => {
     try{
         const searchedContractor = await Contractor.findById(req.params.id);
         const contractorReviews = [];
@@ -44,7 +54,7 @@ router.get("/contractors/:id", async (req, res) => {
     }
 })
 
-router.get("/reviewers/:id", async (req, res) => {
+router.get("/reviewers/:id", isLoggedIn, async (req, res) => {
     try{
         const reviewerContractor = await Contractor.findById(req.params.id).populate({path: "writtenReviews"});
         const reviewerReviewer = await Reviewer.findById(req.params.id).populate({path: "writtenReviews"});
@@ -65,7 +75,7 @@ router.get("/reviewers/:id", async (req, res) => {
     }
 })
 
-router.get("/contractors/:id/writereview", async (req, res) => {
+router.get("/contractors/:id/writereview", isLoggedIn, async (req, res) => {
     try{
         const searchedContractor = await Contractor.findById(req.params.id);
         const loggedContractor = await Contractor.findOne({username: req.session.username});

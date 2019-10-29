@@ -1,18 +1,22 @@
 <%- include("./partials/header.ejs") %>
 <div class="container-fluid">
-    <a href="/" class="home-link">Contractor Ratings</a>
-    <h1>Register</h1>
-    <form id="register-form" action="/register" method="POST">
-        Name:<input type="text" name="name"/>
-        Username:<input type="text" name="username"/>
-        Email:<input type="text" name="email"/>
-        Account Type:<select name="contractor">
-                <option value="yes">Contractor</option>
-                <option value="no">Reviewer</option>
-            </select>
-        Password:<input type="password" name="password"/>
-        <button type="submit">Submit</button>
-        <%= duplicate %>
-    </form>
+    <div class="registration-container">
+        <a href="/" class="home-link">Blue Spotlight</a>
+        <div class="background-layer">
+            <form id="register-form" action="/register" method="POST">
+                <h1 id="register-header">Register</h1>
+                Name:<input type="text" name="name"/><br/>
+                Username:<input type="text" name="username"/><br/>
+                Email:<input type="text" name="email"/><br/>
+                Account Type:<select name="contractor">
+                        <option value="yes">Contractor</option>
+                        <option value="no">Reviewer</option>
+                    </select><br/>
+                Password:<input type="password" name="password"/><br/>
+                <button class="submit-button" type="submit">Submit</button>
+                <%= duplicate %>
+            </form>
+        </div>
+    </div>
 </div>
 <%- include("./partials/footer.ejs") %>
