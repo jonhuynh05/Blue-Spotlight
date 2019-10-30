@@ -109,6 +109,39 @@ router.get("/", (req, res) => {
     }
 })
 
+router.put("/:id/written-reviews/edit/:revid", async (req, res) => {
+    try{
+        const updatedReview = await Review.findByIdAndUpdate(req.params.revid,req.body, {new: true});
+        console.log(updatedReview)
+        res.redirect("/reviewers/"+req.params.id+"/written-reviews")
+    }
+    catch(err){
+        res.send(err)
+        console.log(err)
+    }
+})
+
+
+router.delete("/:id/written-reviews/edit/:revid", async (req, res) => {
+    try{
+        const reviewToBeDeleted = await Review.findById(req.params.revid);
+        const reviewAuthor = await Reviewer.findOne({username: req.session.username});
+        const reviewSubject = await Contractor.findOne({username: reviewToBeDeleted.subjectUsername})
+
+        reviewAuthor.writtenReviews.remove(req.params.revid)
+        await reviewAuthor.save()
+        reviewSubject.reviews.remove(req.params.revid)
+        await reviewSubject.save()
+        const deletedReview = await Review.findByIdAndDelete(req.params.revid)
+
+        res.redirect("/reviewers/"+req.params.id+"/written-reviews");
+    }
+    catch(err) {
+        res.send(err)
+        console.log(err)
+    }
+})
+
 router.put("/:id",  async (req, res) =>{
     try{
         const loggedInReviewer = await Reviewer.findOne({username: req.session.username});
