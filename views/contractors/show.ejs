@@ -5,8 +5,14 @@
         <div class="row" id="name-container">
             <h1 id="welcome-header">Hello, <%=contractor.name%>.</h1>
         </div>
-        <div class="row" id="profile-photo-container">
-            <img src="" alt="" id="contractor-profile-photo">
+        <div class="row">
+            <%if(contractor.profileURL.length < 1){%>
+                <div class="" id="">
+                </div>
+            <%} else{%>
+                <div class="profile-photo" id="contractor-profile-photo" style="background-image: url(<%=contractor.profileURL%>);">
+                </div>
+            <%}%>
         </div>
         <div class="row" id="stats-container">
             <div class="row">

@@ -122,6 +122,7 @@ app.post("/register", async (req, res) => {
             contractorDbEntry.email = req.body.email;
             contractorDbEntry.contractor = true;
             contractorDbEntry.password = passwordHash;
+            contractorDbEntry.profileURL = "";
             contractorDbEntry.followerCount = 0;
             contractorDbEntry.rating = 0;
             const newContractor = await Contractor.create(contractorDbEntry);

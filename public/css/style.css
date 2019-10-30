@@ -323,15 +323,16 @@ select{
     color: white;
 }
 
-/* #profile-photo-container{
+.profile-photo{
     height: 200px;
     width: 200px;
     margin: 0 auto;
+    background-size: cover;
 }
 
 #contractor-profile-photo{
 
-} */
+}
 
 
 /* EDIT CONTRACTOR PROFILE */

@@ -8,6 +8,7 @@ const contractorSchema = new mongoose.Schema({
     contractor: Boolean,
     followerCount: Number,
     rating: Number,
+    profileURL: String,
     reviews: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: "Review"

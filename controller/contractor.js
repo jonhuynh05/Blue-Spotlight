@@ -33,6 +33,9 @@ router.get("/", isLoggedIn, async (req, res) => {
 router.get("/:id", isLoggedIn, async (req, res) => {
     try{
         const foundContractor = await Contractor.findOne({username: req.session.username});
+        console.log(foundContractor)
+        console.log(foundContractor.profileURL)
+        console.log(typeof(foundContractor.profileURL))
         res.render("contractors/show.ejs", {
             accountType: req.session.type,
             contractor: foundContractor
@@ -143,7 +146,8 @@ router.put("/:id", async (req, res) => {
                     contractorDbEntry.name = req.body.name;
                     contractorDbEntry.username = req.body.username;
                     contractorDbEntry.email = req.body.email;
-                    contractorDbEntry.phoneNumber = req.body.phoneNumber
+                    contractorDbEntry.phoneNumber = req.body.phoneNumber;
+                    contractorDbEntry.profileURL = req.body.profileURL;
                     const updatedContractor = await Contractor.findOneAndUpdate({username: req.session.username}, contractorDbEntry, {new: true});
                     req.session.username = updatedContractor.username;
                     req.session.name = updatedContractor.name;
