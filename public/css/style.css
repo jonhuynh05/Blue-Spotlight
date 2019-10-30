@@ -421,6 +421,10 @@ select{
     margin-bottom: 40px;
 }
 
+#your-reviews-header{
+    color: rgb(51, 99, 172);
+}
+
 /* EDIT REVIEW */
 
 #edit-header-container{
