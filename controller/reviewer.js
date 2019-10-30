@@ -214,7 +214,12 @@ router.delete("/:id", async (req, res) => {
     try{
         const reviewerToBeDeleted = await Reviewer.findOne({username: req.session.username});
 
-        //*****MAKE SURE TO REMOVE REVIEW FROM CONTRACTOR*****
+        for (let i = 0; i < reviewerToBeDeleted.writtenReviews.length; i++){
+            await Review.findByIdAndDelete(reviewerToBeDeleted.writtenReviews[i]);
+            let foundContractor = await Contractor.findOne({reviews: reviewerToBeDeleted.writtenReviews[i]});
+            foundContractor.reviews.remove(reviewerToBeDeleted.writtenReviews[i]);
+            await foundContractor.save()
+        }
 
         const deletedReviewer = await Reviewer.findOneAndDelete({username: req.session.username});
         req.session.destroy();
