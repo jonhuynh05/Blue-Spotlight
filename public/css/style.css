@@ -322,7 +322,15 @@ select{
     color: white;
 }
 
+#profile-photo-container{
+    height: 200px;
+    width: 200px;
+    margin: 0 auto;
+}
 
+#contractor-profile-photo{
+
+}
 
 /* Reviewer Index */
 

@@ -118,7 +118,6 @@ router.get("/", (req, res) => {
 
 router.post("/contractors/:id", async (req, res) => {
     try{
-        console.log(req.body)
         const loggedContractor = await Contractor.findOne({username: req.session.username});
         const loggedReviewer = await Reviewer.findOne({username: req.session.username});
         const reviewedContractor = await Contractor.findById(req.params.id);
