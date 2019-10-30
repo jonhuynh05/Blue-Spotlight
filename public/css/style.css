@@ -203,11 +203,14 @@ select{
     width: 175px;
     text-align: center;
     margin-top: 5px;
+    padding: 5px;
 
 }
 
 #review-button{
-    color: white
+    color: white;
+    font-family: 'Raleway', sans-serif;
+
 }
 
 /* NAV BAR */
@@ -317,6 +320,24 @@ select{
 
 #see-reviews-anchor{
     color: white;
+}
+
+
+
+/* Reviewer Index */
+
+#profile-button{
+    color: white;
+    font-family: 'Raleway', sans-serif;
+}
+
+#profile-button:hover{
+    text-decoration: none;
+    color: white
+}
+
+#reviewer-text-container{
+    margin-top: 160px;
 }
 
 

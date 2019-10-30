@@ -1,17 +1,20 @@
 <%- include("../partials/header.ejs") %>
 <div class="container-fluid">
-    <a href="/" class="home-link">Contractor Ratings</a>
-    <h1>Reviewers</h1>
-    <p>Contractor Ratings - where contractors can add their profiles for market exposure, and where people can help each other find the right contractor.</p>
-    <p>Your profile is on Contractor Ratings. Find your contractor and let us know what you think about them.</p>
-    <div class="row" id="profile-button-container">
-        <div id="profile-anchor-container">
-            <a href="/reviewers/<%=reviewer._id%>" class="profile-button">See Profile</a>
+<%- include("../partials/navbar.ejs") %>
+    <div class="user-home-container">
+        <div class="text-container" id="reviewer-text-container">
+            <h1 id="contractor-index-header">Reviewers</h1>
+            <p class="contractor-index-description">Welcome! With access to Blue Spotlight's contractor profiles, you'll be able to find the contractor that works for you through word of mouth from the market. To begin your search, click the Find Contractors button below. If you have worked with a contractors, leave a review about them.</p>
         </div>
-    </div>
-    <div class="row" id="review-button-container">
-        <div id="review-anchor-container">
-            <a href="/reviews" class="review-button">Find Contractors</a>
+        <div class="row" id="profile-button-container">
+            <div class="anchor-container" id="profile-anchor-container">
+                <a href="/reviewers/<%=reviewer._id%>" id="profile-button">See Profile</a>
+            </div>
+        </div>
+        <div class="row" id="review-button-container">
+            <div id="review-anchor-container">
+                <a href="/reviews" id="review-button">Find Contractors</a>
+            </div>
         </div>
     </div>
 </div>
