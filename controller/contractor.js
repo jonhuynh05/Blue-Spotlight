@@ -52,7 +52,7 @@ router.get("/:id/written-reviews", isLoggedIn, async (req, res) => {
         for (let i = 0; i < loggedInContractor.writtenReviews.length; i++){
             let foundReview = await Review.findById(loggedInContractor.writtenReviews[i]);
             reviewsArr.push(foundReview);
-            let reviewSubject = await Contractor.findOne(reviewsArr[i].profileURL);
+            let reviewSubject = await Contractor.findOne({username: reviewsArr[i].subjectUsername});
             reviewSubjectArr.push(reviewSubject)
         }
 

@@ -1,20 +1,37 @@
 <%- include("../partials/header.ejs") %>
 <div class="container-fluid">
-    <a href="/" class="home-link">Contractor Ratings</a>
+<%- include("../partials/navbar.ejs") %>
     <div class="row" id="name-container">
-        <h1>Your Reviews</h1>
+        <h1 id="your-reviews-header">Your Reviews</h1>
     </div>
     <div>
-        <%for (let i = 0; i < reviewer.writtenReviews.length; i++){%>
-            <%=foundReviews[i].subjectName%><br/>
-            <%=foundReviews[i].rating%><br/>
-            <%=foundReviews[i].description%><br/>
-            <div class="row" id="edit-review-button-container">
-                <div id="edit-review-anchor-container">
-                    <a href="/reviewers/<%=reviewer._id%>/written-reviews/edit/<%=foundReviews[i]._id%>" class="edit-button" id="edit-review-anchor">Edit Review</a>
+        <div class="row" id="review-stream-container">
+            <%for (let i = 0; i < reviewer.writtenReviews.length; i++){%>
+                <div class="col-6">
+                    <div class="review-subject-box">
+                        <%=foundReviews[i].subjectName%><br/>
+                    </div>
+                    <div class="row">
+                        <%if(reviewSubject[i].profileURL.length < 1){%>
+                            <div class="" id="">
+                            </div>
+                        <%} else{%>
+                            <div class="profile-photo" id="contractor-profile-photo" style="background-image: url(<%=reviewSubject[i].profileURL%>);">
+                            </div>
+                        <%}%>
+                    </div>
+                    <div class="review-rating-box">
+                        Rating: <%=foundReviews[i].rating%>/5<br/>
+                    </div>
+                    <div class="review-description-box">
+                        <%=foundReviews[i].description%><br/>
+                    </div>
+                        <div class="edit-anchor-container" id="review-stream-edit-container">
+                            <a href="/reviewers/<%=reviewer._id%>/written-reviews/edit/<%=foundReviews[i]._id%>" class="edit-button" id="edit-review-anchor">Edit Review</a>
+                        </div>
                 </div>
-            </div>
-        <%}%>
+            <%}%>
+        </div>
     </div>
 </div>
 <%- include("../partials/footer.ejs") %>

@@ -48,15 +48,19 @@ router.get("/:id/written-reviews", isLoggedIn, async (req, res) => {
     try{
         const loggedInReviewer = await Reviewer.findOne({username: req.session.username});
         const reviewsArr = [];
+        const reviewSubjectArr = [];
         for (let i = 0; i < loggedInReviewer.writtenReviews.length; i++){
             let foundReview = await Review.findById(loggedInReviewer.writtenReviews[i]);
             reviewsArr.push(foundReview);
+            let reviewSubject = await Contractor.findOne({username: reviewsArr[i].subjectUsername});
+            reviewSubjectArr.push(reviewSubject)
         }
 
         res.render("reviewers/writtenReviews.ejs", {
             accountType: req.session.type,
             reviewer: loggedInReviewer,
             foundReviews: reviewsArr,
+            reviewSubject: reviewSubjectArr
         })
     }
     catch(err){
