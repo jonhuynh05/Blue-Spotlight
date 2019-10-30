@@ -195,10 +195,25 @@ router.put("/:id", async (req, res) => {
 router.delete("/:id", async (req, res) => {
     try{
         const contractorToBeDeleted = await Contractor.findOne({username: req.session.username})
-
-
-        //*****MAKE SURE TO REMOVE REVIEW FROM USER*****
-
+        for (let i = 0; i < contractorToBeDeleted.reviews.length; i++){
+            Review.findByIdAndDelete(contractorToBeDeleted.reviews[i]);
+            let foundContractor = await Contractor.findOne({writtenReviews: contractorToBeDeleted.reviews[i]});
+            if(foundContractor){
+                foundContractor.writtenReviews.remove(contractorToBeDeleted.reviews[i]);
+                await foundContractor.save()
+            }
+            let foundReviewer = await Reviewer.findOne({writtenReviews: contractorToBeDeleted.reviews[i]});
+            if(foundReviewer){
+                foundReviewer.writtenReviews.remove(contractorToBeDeleted.reviews[i]);
+                await foundReviewer.save()
+            }
+        }
+        for (let i = 0; i < contractorToBeDeleted.writtenReviews.length; i++){
+            Review.findByIdAndDelete(contractorToBeDeleted.writtenReviews[i])
+            let foundContractor = await Contractor.findOne({reviews: contractorToBeDeleted.writtenReviews[i]});
+            foundContractor.reviews.remove(contractorToBeDeleted.writtenReviews[i]);
+            foundContractor.save()
+        }
         const deletedContractor = await Contractor.findOneAndDelete({username: req.session.username});
         req.session.destroy();
         res.redirect("/");
