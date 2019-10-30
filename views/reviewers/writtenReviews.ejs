@@ -1,0 +1,20 @@
+<%- include("../partials/header.ejs") %>
+<div class="container-fluid">
+    <a href="/" class="home-link">Contractor Ratings</a>
+    <div class="row" id="name-container">
+        <h1>Your Reviews</h1>
+    </div>
+    <div>
+        <%for (let i = 0; i < reviewer.writtenReviews.length; i++){%>
+            <%=foundReviews[i].subjectName%><br/>
+            <%=foundReviews[i].rating%><br/>
+            <%=foundReviews[i].description%><br/>
+            <div class="row" id="edit-review-button-container">
+                <div id="edit-review-anchor-container">
+                    <a href="/reviewers/<%=reviewer._id%>/written-reviews/edit/<%=foundReviews[i]._id%>" class="edit-button" id="edit-review-anchor">Edit Review</a>
+                </div>
+            </div>
+        <%}%>
+    </div>
+</div>
+<%- include("../partials/footer.ejs") %>

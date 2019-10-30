@@ -15,5 +15,10 @@
             <a href="/reviewers/<%=reviewer._id%>/edit" class="edit-button">Edit Profile</a>
         </div>
     </div>
+    <div class="row" id="see-reviews-container">
+        <div class="edit-anchor-container" id="see-reviews-anchor-container">
+            <a href="/reviewers/<%=reviewer._id%>/written-reviews" id="see-reviews-anchor">Your Submitted Reviews</a>
+        </div>
+    </div>
 </div>
 <%- include("../partials/footer.ejs") %>

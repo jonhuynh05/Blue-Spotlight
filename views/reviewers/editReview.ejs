@@ -1,0 +1,23 @@
+<%- include("../partials/header.ejs") %>
+<div class="container-fluid">
+    <a href="/" class="home-link">Contractor Ratings</a>
+    <h1>Edit Review</h1>
+    <p><%=review.subjectName%></p>
+    <form id="edit-form" action="/reviewers/<%=reviewer._id%>/written-reviews/edit/<%=review._id%>?_method=PUT" method="POST">
+        <select name="rating">
+            <%for (let i = 1; i < 6; i++){%>
+                <option value="<%=i%>" <%if(review.rating === i){%>
+                    selected
+                <%}%>>
+                    <%=i%>
+                </option>
+            <%}%>
+        </select>
+        <textarea name="description" type="text" placeholder="Describe Your Experience"><%=review.description%></textarea>
+        <button type="submit">Submit</button>
+    </form>
+    <form action="/reviewers/<%=reviewer._id%>/written-reviews/edit/<%=review._id%>?_method=DELETE" method="POST">
+        <button class="delete-button" type="submit">Delete Review</button>
+    </form>
+</div>
+<%- include("../partials/footer.ejs") %>

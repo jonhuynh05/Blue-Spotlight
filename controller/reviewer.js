@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const Reviewer = require("../models/reviewers");
 const Contractor = require("../models/contractors");
+const Review = require("../models/reviews");
 const bcrypt = require("bcryptjs");
 const isLoggedIn = (req, res, next) => {
     if(req.session.logged === true){
@@ -35,6 +36,45 @@ router.get("/:id", isLoggedIn, async (req, res) => {
         res.render("reviewers/show.ejs", {
             accountType: req.session.type,
             reviewer: loggedInReviewer
+        })
+    }
+    catch(err){
+        res.send(err)
+        console.log(err)
+    }
+})
+
+router.get("/:id/written-reviews", isLoggedIn, async (req, res) => {
+    try{
+        const loggedInReviewer = await Reviewer.findOne({username: req.session.username});
+        const reviewsArr = [];
+        for (let i = 0; i < loggedInReviewer.writtenReviews.length; i++){
+            let foundReview = await Review.findById(loggedInReviewer.writtenReviews[i]);
+            reviewsArr.push(foundReview);
+        }
+
+        res.render("reviewers/writtenReviews.ejs", {
+            accountType: req.session.type,
+            reviewer: loggedInReviewer,
+            foundReviews: reviewsArr,
+        })
+    }
+    catch(err){
+        res.send(err)
+        console.log(err)
+    }
+})
+
+router.get("/:id/written-reviews/edit/:revid", isLoggedIn, async (req, res) => {
+    try{
+        const loggedInReviewer = await Reviewer.findOne({username: req.session.username});
+        const foundReview = await Review.findById(req.params.revid);
+        console.log(loggedInReviewer)
+        console.log(foundReview)
+        res.render("reviewers/editReview.ejs", {
+            accountType: req.session.type,
+            reviewer: loggedInReviewer,
+            review: foundReview
         })
     }
     catch(err){

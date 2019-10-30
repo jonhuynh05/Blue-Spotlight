@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const Contractor = require("../models/contractors");
 const Reviewer = require("../models/reviewers");
-const Review = require("../models/reviews")
+const Review = require("../models/reviews");
 const bcrypt = require("bcryptjs");
 const isLoggedIn = (req, res, next) => {
     if(req.session.logged === true){
