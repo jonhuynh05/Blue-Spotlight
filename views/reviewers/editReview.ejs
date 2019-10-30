@@ -1,23 +1,33 @@
 <%- include("../partials/header.ejs") %>
 <div class="container-fluid">
-    <a href="/" class="home-link">Contractor Ratings</a>
-    <h1>Edit Review</h1>
-    <p><%=review.subjectName%></p>
-    <form id="edit-form" action="/reviewers/<%=reviewer._id%>/written-reviews/edit/<%=review._id%>?_method=PUT" method="POST">
-        <select name="rating">
-            <%for (let i = 1; i < 6; i++){%>
-                <option value="<%=i%>" <%if(review.rating === i){%>
-                    selected
-                <%}%>>
-                    <%=i%>
-                </option>
-            <%}%>
-        </select>
-        <textarea name="description" type="text" placeholder="Describe Your Experience"><%=review.description%></textarea>
-        <button type="submit">Submit</button>
-    </form>
-    <form action="/reviewers/<%=reviewer._id%>/written-reviews/edit/<%=review._id%>?_method=DELETE" method="POST">
-        <button class="delete-button" type="submit">Delete Review</button>
-    </form>
+<%- include("../partials/navbar.ejs") %>
+    <div class="row" id="edit-header-container">
+        <h1 id="edit-review-header">Edit Review</h1>
+    </div>
+    <div class="row" id="name-edit-container">
+        <p id="name-edit-header"><%=review.subjectName%></p>
+    </div>
+    <div id="edit-review-container">
+        <form id="edit-form" action="/reviewers/<%=reviewer._id%>/written-reviews/edit/<%=review._id%>?_method=PUT" method="POST">
+            <div class="row">
+                <textarea name="description" type="text" placeholder="Describe Your Experience"><%=review.description%></textarea>
+            </div>
+            <div class="row">
+                <select name="rating">
+                    <%for (let i = 1; i < 6; i++){%>
+                        <option value="<%=i%>" <%if(review.rating === i){%>
+                            selected
+                        <%}%>>
+                            <%=i%>
+                        </option>
+                    <%}%>
+                </select>
+            </div>
+            <button class="submit-button" type="submit">Submit</button>
+        </form>
+        <form action="/reviewers/<%=reviewer._id%>/written-reviews/edit/<%=review._id%>?_method=DELETE" method="POST">
+            <button class="delete-button" type="submit">Delete Review</button>
+        </form>
+    </div>
 </div>
 <%- include("../partials/footer.ejs") %>
