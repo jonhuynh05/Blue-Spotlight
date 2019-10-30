@@ -322,7 +322,7 @@ select{
     color: white;
 }
 
-#profile-photo-container{
+/* #profile-photo-container{
     height: 200px;
     width: 200px;
     margin: 0 auto;
@@ -330,9 +330,30 @@ select{
 
 #contractor-profile-photo{
 
+} */
+
+
+/* EDIT CONTRACTOR PROFILE */
+
+.edit-profile-container{
+    background-image: url("../images/worker-in-house.jpg");
+    height: 100%;
+    background-size: cover;
 }
 
-/* Reviewer Index */
+.edit-form{
+    background-color: rgba(51, 99, 172, .6);
+    padding: 10px 20px 20px 20px;
+    font-weight: bold;
+    font-family: 'Raleway', sans-serif;
+    text-align: center;
+    color: white;
+    width: 40%;
+    margin: 0 auto 0 auto;
+}
+
+
+/* REVIEWER INDEX */
 
 #profile-button{
     color: white;
@@ -347,6 +368,7 @@ select{
 #reviewer-text-container{
     margin-top: 160px;
 }
+
 
 
 
