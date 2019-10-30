@@ -14,9 +14,6 @@
                     <a href="/reviewers/<%=reviewer._id%>/written-reviews/edit/<%=foundReviews[i]._id%>" class="edit-button" id="edit-review-anchor">Edit Review</a>
                 </div>
             </div>
-            <form action="/reviewers/<%=reviewer._id%>/written-reviews/edit/<%=foundReviews[i]._id%>?_method=DELETE" method="POST">
-                <button class="delete-button" type="submit">Delete</button>
-            </form>
         <%}%>
     </div>
 </div>

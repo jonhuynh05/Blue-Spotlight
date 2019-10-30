@@ -224,4 +224,25 @@ router.delete("/:id", async (req, res) => {
     }
 })
 
+
+router.delete("/:id/written-reviews/edit/:revid", async (req, res) => {
+    try{
+        const reviewToBeDeleted = await Review.findById(req.params.revid);
+        const reviewAuthor = await Contractor.findOne({username: req.session.username});
+        const reviewSubject = await Contractor.findOne({username: reviewToBeDeleted.subjectUsername})
+
+        reviewAuthor.writtenReviews.remove(req.params.revid)
+        await reviewAuthor.save()
+        reviewSubject.reviews.remove(req.params.revid)
+        await reviewSubject.save()
+        const deletedReview = await Review.findByIdAndDelete(req.params.revid)
+
+        res.redirect("/contractors/"+req.params.id+"/written-reviews");
+    }
+    catch(err) {
+        res.send(err)
+        console.log(err)
+    }
+})
+
 module.exports = router;
