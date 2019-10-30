@@ -369,8 +369,58 @@ select{
     margin-top: 160px;
 }
 
+/* CONTRACTOR SUBMITTED REVIEWS */
+
+#your-reviews-header{
+    color: rgb(51, 99, 172);
+    font-family: 'Raleway', sans-serif;
+    margin-bottom: 40px;
+}
+
+#edit-review-anchor{
+    color: white;
+    font-family: 'Raleway', sans-serif;
+}
+
+#edit-review-anchor:hover{
+    color: white;
+    text-decoration: none;
+}
+
+#review-stream-edit-container{
+    margin: 10px auto 0 auto
+}
+
+#review-stream-container{
+    text-align: center;
+    padding: 0 30px;
+}
+
+.review-subject-box{
+    font-family: 'Raleway', sans-serif;
+    color: rgb(51, 99, 172);
+    font-size: 30px;
+}
+
+.review-rating-box{
+    font-family: 'Raleway', sans-serif;
+    color: rgb(51, 99, 172);
+    font-size: 20px;
+}
+
+.review-description-box{
+    margin-top: 10px;
+    font-family: 'Raleway', sans-serif;
+    color: black;
+    font-size: 15px;
+}
+
+.col-6{
+    margin-bottom: 40px;
+}
 
 
+/* GENERAL */
 
 textarea{
     width: 400px;
