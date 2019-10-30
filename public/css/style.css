@@ -84,10 +84,10 @@
 }
 
 .submit-button{
-    color:rgb(51, 99, 172);
     text-decoration: none !important;
     font-weight: bold;
     font-family: 'Raleway', sans-serif;
+    margin-top: 10px;
     margin-bottom: 10px;
 }
 
@@ -113,9 +113,10 @@ input{
 }
 
 select{
-    margin-bottom: 20px !important;
-    margin-left: 15px !important;
-    color: rgb(51, 99, 172)
+    margin-bottom: 10px !important;
+    margin-top: 10px !important;
+    color: rgb(51, 99, 172);
+    font-family: 'Raleway', sans-serif !important;
 }
 
 .home-link{
@@ -419,6 +420,33 @@ select{
     margin-bottom: 40px;
 }
 
+/* EDIT REVIEW */
+
+#edit-header-container{
+    margin-top: 80px;
+}
+
+#edit-review-header{
+    color: rgb(51, 99, 172);
+}
+
+#name-edit-header{
+    color: rgb(51, 99, 172);
+    font-family: 'Raleway', sans-serif;
+    font-size: 25px;
+}
+
+#edit-review-container{
+    text-align: center;
+}
+
+.delete-button{
+    text-decoration: none !important;
+    font-weight: bold;
+    font-family: 'Raleway', sans-serif;
+    margin-top: 30px;
+    margin-bottom: 10px;
+}
 
 /* GENERAL */
 
