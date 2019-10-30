@@ -210,6 +210,8 @@ select{
     color: white
 }
 
+/* NAV BAR */
+
 .navbar-brand{
     color: rgb(51, 99, 172) !important;
     text-decoration: none;
@@ -262,10 +264,61 @@ select{
 #reviewer-nav-show{
 }
 
+/* CONTRACTOR PROFILE */
 
-/* <li class="nav-item" id="reviewer-nav">
-<a class="nav-link" href="/reviewers/<%=reviewer._id%>">Profile</a>
-</li> */
+.user-home-container{
+    background-color: white;
+    height: 100%;
+    background-size: cover;
+    overflow: auto;
+}
+
+#name-container{
+    margin-top: 100px;
+}
+
+#welcome-header{
+    color: rgb(51, 99, 172);
+    font-family: 'Raleway', sans-serif;
+}
+
+#stats-container{
+    display: block;
+    margin-top: 10px;
+}
+
+#rating{
+    color: rgb(51, 99, 172);
+    font-family: 'Raleway', sans-serif;
+    font-size: 20px;
+}
+
+.edit-anchor-container{
+    background-color: rgb(51, 99, 172);
+    width: 175px;
+    text-align: center;
+    margin-top: 30px;
+    font-family: 'Raleway', sans-serif;
+    padding: 5px;
+}
+
+#edit-button{
+    color: white;
+}
+
+#see-reviews-anchor-container{
+    background-color: rgb(51, 99, 172);
+    width: 175px;
+    text-align: center;
+    margin-top: 30px;
+    font-family: 'Raleway', sans-serif;
+    padding: 5px;
+}
+
+#see-reviews-anchor{
+    color: white;
+}
+
 
 
 textarea{

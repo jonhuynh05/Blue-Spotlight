@@ -1,23 +1,33 @@
 <%- include("../partials/header.ejs") %>
 <div class="container-fluid">
-    <a href="/" class="home-link">Contractor Ratings</a>
-    <div class="row" id="name-container">
-        <h1>Hello, <%=contractor.name%>. </h1>
-    </div>
-    <div class="row" id="profile-photo-container">
-        <img src="" alt="" id="profile-photo">
-    </div>
-    <div class="row" id="stats-container">
-        <p>Stars: <%=contractor.rating%></p>
-    </div>
-    <div class="row" id="edit-profile-button-container">
-        <div id="edit-profile-anchor-container">
-            <a href="/contractors/<%=contractor._id%>/edit" class="edit-button" id="edit-profile-anchor">Edit Profile</a>
+<%- include("../partials/navbar.ejs") %>
+    <div class="profile-container">
+        <div class="row" id="name-container">
+            <h1 id="welcome-header">Hello, <%=contractor.name%>.</h1>
         </div>
-    </div>
-    <div class="row" id="see-reviews-container">
-        <div id="see-reviews-anchor-container">
-            <a href="/contractors/<%=contractor._id%>/written-reviews" id="see-reviews-anchor">Your Submitted Reviews</a>
+        <div class="row" id="profile-photo-container">
+            <img src="" alt="" id="profile-photo">
+        </div>
+        <div class="row" id="stats-container">
+            <div class="row">
+                <p id="rating">Rating: <%=contractor.rating%>/5</p>
+            </div>
+            <div class="row">
+                <p id="rating">Email: <%=contractor.email%></p>
+            </div>
+            <div class="row">
+                <p id="rating">Phone Number: <%=contractor.phoneNumber%></p>
+            </div>
+        </div>
+        <div class="row" id="edit-button-container">
+            <div class="edit-anchor-container">
+                <a href="/contractors/<%=contractor._id%>/edit" class="anchor-button" id="edit-button">Edit Profile</a>
+            </div>
+        </div>
+        <div class="row" id="see-reviews-container">
+            <div class="edit-anchor-container" id="see-reviews-anchor-container">
+                <a href="/contractors/<%=contractor._id%>/written-reviews" id="see-reviews-anchor">Your Submitted Reviews</a>
+            </div>
         </div>
     </div>
 </div>

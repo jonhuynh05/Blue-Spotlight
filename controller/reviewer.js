@@ -19,6 +19,7 @@ router.get("/", isLoggedIn, async (req, res) => {
         console.log(req.session)
         const loggedInReviewer = await Reviewer.findOne({username: req.session.username});
         res.render("reviewers/index.ejs", {
+            accountType: req.session.type,
             reviewer: loggedInReviewer
         })
     }
@@ -32,6 +33,7 @@ router.get("/:id", isLoggedIn, async (req, res) => {
     try{
         const loggedInReviewer = await Reviewer.findOne({username: req.session.username});
         res.render("reviewers/show.ejs", {
+            accountType: req.session.type,
             reviewer: loggedInReviewer
         })
     }
@@ -45,6 +47,7 @@ router.get("/:id/edit", isLoggedIn, async (req, res) => {
     try{
         const loggedInReviewer = await Reviewer.findOne({username: req.session.username});
         res.render("reviewers/edit.ejs", {
+            accountType: req.session.type,
             reviewer: loggedInReviewer,
             duplicate: req.session.duplicate
         })
@@ -94,7 +97,7 @@ router.put("/:id",  async (req, res) =>{
                     req.session.duplicate = "";
                     console.log(updatedReviewer)
                     console.log(req.session)
-                    res.redirect("/reviewers");
+                    res.redirect("/reviewers/"+req.params.id);
                 }
                 else{
                     const newPassword = req.body.password;
@@ -110,7 +113,7 @@ router.put("/:id",  async (req, res) =>{
                     req.session.duplicate = "";
                     console.log(updatedReviewer)
                     console.log(req.session)
-                    res.redirect("/reviewers");
+                    res.redirect("/reviewers/"+req.params.id);
                 }
             }
             else{
@@ -124,7 +127,7 @@ router.put("/:id",  async (req, res) =>{
                 req.session.duplicate = "";
                 console.log(updatedReviewer)
                 console.log(req.session)
-                res.redirect("/reviewers");
+                res.redirect("/reviewers/"+req.params.id);
             }
         }
     }

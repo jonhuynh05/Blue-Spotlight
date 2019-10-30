@@ -34,6 +34,7 @@ router.get("/:id", isLoggedIn, async (req, res) => {
     try{
         const foundContractor = await Contractor.findOne({username: req.session.username});
         res.render("contractors/show.ejs", {
+            accountType: req.session.type,
             contractor: foundContractor
         })
     }
@@ -53,6 +54,7 @@ router.get("/:id/written-reviews", isLoggedIn, async (req, res) => {
         }
 
         res.render("contractors/writtenReviews.ejs", {
+            accountType: req.session.type,
             contractor: loggedInContractor,
             foundReviews: reviewsArr,
         })
@@ -67,6 +69,7 @@ router.get("/:id/edit", isLoggedIn, async (req, res) => {
     try{
         const foundContractor = await Contractor.findOne({username: req.session.username});
         res.render("contractors/edit.ejs", {
+            accountType: req.session.type,
             contractor: foundContractor,
             duplicate: req.session.duplicate
         })
@@ -84,6 +87,7 @@ router.get("/:id/written-reviews/edit/:revid", isLoggedIn, async (req, res) => {
         console.log(loggedInContractor)
         console.log(foundReview)
         res.render("contractors/editReview.ejs", {
+            accountType: req.session.type,
             contractor: loggedInContractor,
             review: foundReview
         })
@@ -146,7 +150,7 @@ router.put("/:id", async (req, res) => {
                     req.session.duplicate = "";
                     console.log(updatedContractor)
                     console.log(req.session)
-                    res.redirect("/contractors");
+                    res.redirect("/contractors/"+req.params.id);
                 }
                 else{
                     const newPassword = req.body.password;
@@ -163,7 +167,7 @@ router.put("/:id", async (req, res) => {
                     req.session.duplicate = "";
                     console.log(updatedContractor)
                     console.log(req.session)
-                    res.redirect("/contractors");
+                    res.redirect("/contractors/"+req.params.id);
                 }
             }
             else{
@@ -178,7 +182,7 @@ router.put("/:id", async (req, res) => {
                 req.session.duplicate = "";
                 console.log(updatedContractor)
                 console.log(req.session)
-                res.redirect("/contractors");
+                res.redirect("/contractors/"+req.params.id);
             }
         }
     }
