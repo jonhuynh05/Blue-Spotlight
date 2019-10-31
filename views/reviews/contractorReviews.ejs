@@ -1,31 +1,39 @@
 <%- include("../partials/header.ejs") %>
 <div class="container-fluid">
 <%- include("../partials/navbar.ejs") %>
-    <div class="row" id="contractor-review-stream-header-container">
-        <h1 id="contractor-review-stream-header"><%=searchedContractor.name%></h1>
-    </div>
     <div class="row">
-        <%if(searchedContractor.profileURL === ""){%>
-            <div class="" id="">
-            </div>
-        <%} else{%>
-            <div class="profile-photo" id="contractor-profile-photo" style="background-image: url(<%=searchedContractor.profileURL%>);">
-            </div>
-        <%}%>
+        <div class="col-lg-3 col-sm-6" id="profile-left">
+            <%if(searchedContractor.profileURL === ""){%>
+                <div class="" id="">
+                </div>
+            <%} else{%>
+                <div class="profile-photo" id="contractor-profile-photo" style="background-image: url(<%=searchedContractor.profileURL%>);">
+                </div>
+            <%}%>
+        </div>
+    <div class="col-lg-3 col-sm-6" id="profile-right">
+        <div class="row" id="name-info-row">
+            <p id="name-info"><%=searchedContractor.name%></p><br/>
+        </div>
+        <div class="row" id="contact-info">
+            Rating: <%=searchedContractor.rating%>/5
+        </div>
+        <div class="row" id="contact-info">
+            Email: <%=searchedContractor.email%>
+        </div>
+        <div class="row" id="contact-info">
+            Phone Number: <%=searchedContractor.phoneNumber%>
+        </div>
     </div>
-    <div class="row" id="contractor-review-stream-rating-container">
-        Rating: <%=searchedContractor.rating%>/5
-    </div>
+</div>
         <%for (let i = 0; i < searchedContractor.reviews.length; i++){%>
             <div class="row" id="rating-and-description-row">
-                <div class="col-2" id="rating-in-stream">
-                    <%=foundReviews[i].rating%>
+                <div class="col-4" id="rating-in-stream">
+                    <a class="reviewer-profile-link" href="/reviews/reviewers/<%=foundReviews[i].authorId%>"><%=foundReviews[i].authorName%></a><br/>
+                    <%=foundReviews[i].rating%>/5
                 </div>
-                <div class="col-8" id="description-in-stream">
+                <div class="col-6" id="description-in-stream">
                     <%=foundReviews[i].description%>
-                </div>
-                <div class="col-2" id="author-in-stream">
-                    <a class="reviewer-profile-link" href="/reviews/reviewers/<%=foundReviews[i].authorId%>"><%=foundReviews[i].authorName%></a>
                 </div>
             </div>
         <%}%>

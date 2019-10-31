@@ -527,6 +527,31 @@ select{
 
 /* CONTRACTOR REVIEW STREAM */
 
+#profile-left{
+    padding-top: 100px !important;
+}
+#profile-right{
+}
+
+#name-info-row{
+    font-family: 'Raleway', sans-serif;
+    color: rgb(51, 99, 172);
+    font-size: 20px;
+    margin: 120px 0 0 0;
+}
+
+#contact-info{
+    font-family: 'Raleway', sans-serif;
+    color: rgb(51, 99, 172);
+    font-size: 20px;
+    margin: 10px 0 10px 0;
+}
+
+#name-info{
+    font-size: 30px;
+    margin: 0 !important;
+}
+
 #contractor-review-stream-header-container{
     margin: 80px 0 10px 0;
 }
@@ -537,19 +562,22 @@ select{
 }
 
 #contractor-review-stream-rating-container{
-    padding: 20px;
+    /* padding: 20px; */
     font-family: 'Raleway', sans-serif;
     color: rgb(51, 99, 172);
     font-size: 20px;
+    margin: 150px 0 10px 0;
+
 }
 
 #rating-and-description-row{
-    margin-bottom: 70px;
+    margin-top: 60px;
+    margin-bottom: 30px;
 }
 
 #rating-in-stream{
     color: rgb(51, 99, 172);
-    font-size: 30px;  
+    font-size: 22px;  
     font-family: 'Raleway', sans-serif;
     text-align: center;
 }
@@ -558,8 +586,6 @@ select{
     color: black;
     font-size: 15px;  
     text-align: left;
-    border-left: 3px solid rgb(51, 99, 172);
-    border-right: 3px solid rgb(51, 99, 172);
 }
 
 #reviewer-profile-link-container{
@@ -567,7 +593,7 @@ select{
 }
 
 .reviewer-profile-link{
-    font-size: 20px;
+    font-size: 22px;
 }
 
 #author-in-stream{
@@ -576,6 +602,14 @@ select{
 #review-button-container{
     margin-bottom: 50px;
 }
+
+#profile-information{
+    display: block;
+}
+
+#contractor-contact-info{
+}
+
 
 /* GENERAL */
 
