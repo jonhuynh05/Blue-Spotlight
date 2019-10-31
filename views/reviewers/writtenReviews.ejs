@@ -12,7 +12,7 @@
                         <%=foundReviews[i].subjectName%><br/>
                     </div>
                     <div class="row">
-                        <%if(reviewSubject[i].profileURL.length < 1){%>
+                        <%if(reviewSubject[i].profileURL === ""){%>
                             <div class="" id="">
                             </div>
                         <%} else{%>
@@ -20,15 +20,19 @@
                             </div>
                         <%}%>
                     </div>
-                    <div class="review-rating-box">
+                    <div class="review-rating-box" id="user-review-stream-rating-box">
                         Rating: <%=foundReviews[i].rating%>/5<br/>
                     </div>
-                    <div class="review-description-box">
-                        <%=foundReviews[i].description%><br/>
+                    <div class="row">
+                        <div class="review-description-box">
+                            <%=foundReviews[i].description%><br/>
+                        </div>
                     </div>
-                        <div class="edit-anchor-container" id="review-stream-edit-container">
+                    <div class="row" id="contractor-edit-review-button-container">
+                        <div class="edit-anchor-container" id="write-review-stream-edit-container">   
                             <a href="/reviewers/<%=reviewer._id%>/written-reviews/edit/<%=foundReviews[i]._id%>" class="edit-button" id="edit-review-anchor">Edit Review</a>
                         </div>
+                    </div>
                 </div>
             <%}%>
         </div>

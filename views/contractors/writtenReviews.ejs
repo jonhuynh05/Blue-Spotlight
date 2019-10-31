@@ -6,35 +6,35 @@
     </div>
     <div>
         <div class="row" id="review-stream-container">
-        <%for (let i = 0; i < contractor.writtenReviews.length; i++){%>
-            <div class="col-6" >
-                <div class="review-subject-box">
-                    <%=foundReviews[i].subjectName%><br/>
-                </div>
-                <div class="row">
-                    <%if(reviewSubject[i].profileURL === ""){%>
-                        <div class="" id="">
+            <%for (let i = 0; i < contractor.writtenReviews.length; i++){%>
+                <div class="col-6" >
+                    <div class="review-subject-box">
+                        <%=foundReviews[i].subjectName%><br/>
+                    </div>
+                    <div class="row">
+                        <%if(reviewSubject[i].profileURL === ""){%>
+                            <div class="" id="">
+                            </div>
+                        <%} else{%>
+                            <div class="profile-photo" id="contractor-profile-photo" style="background-image: url(<%=reviewSubject[i].profileURL%>);">
+                            </div>
+                        <%}%>
+                    </div>
+                    <div class="review-rating-box" id="user-review-stream-rating-box">
+                        Rating: <%=foundReviews[i].rating%>/5<br/>
+                    </div>
+                    <div class="row">
+                        <div class="review-description-box">
+                            <%=foundReviews[i].description%><br/>
                         </div>
-                    <%} else{%>
-                        <div class="profile-photo" id="contractor-profile-photo" style="background-image: url(<%=reviewSubject[i].profileURL%>);">
+                    </div>
+                    <div class="row" id="contractor-edit-review-button-container">
+                        <div class="edit-anchor-container" id="write-review-stream-edit-container">
+                            <a href="/contractors/<%=contractor._id%>/written-reviews/edit/<%=foundReviews[i]._id%>" class="edit-button" id="edit-review-anchor">Edit Review</a>
                         </div>
-                    <%}%>
-                </div>
-                <div class="review-rating-box" id="user-review-stream-rating-box">
-                    Rating: <%=foundReviews[i].rating%>/5<br/>
-                </div>
-                <div class="row">
-                    <div class="review-description-box">
-                        <%=foundReviews[i].description%><br/>
                     </div>
                 </div>
-                <div class="row" id="contractor-edit-review-button-container">
-                    <div class="edit-anchor-container" id="write-review-stream-edit-container">
-                        <a href="/contractors/<%=contractor._id%>/written-reviews/edit/<%=foundReviews[i]._id%>" class="edit-button" id="edit-review-anchor">Edit Review</a>
-                    </div>
-                </div>
-            </div>
-        <%}%>
+            <%}%>
         </div>
     </div>
 </div>

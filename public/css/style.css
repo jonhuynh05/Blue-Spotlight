@@ -432,6 +432,7 @@ select{
     bottom: 0;
     width: 100%;
     justify-content: center;
+    padding-right: 28px;
 }
 
 #your-reviews-header{
