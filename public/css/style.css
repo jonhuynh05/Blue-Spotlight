@@ -408,6 +408,7 @@ select{
     font-family: 'Raleway', sans-serif;
     color: rgb(51, 99, 172);
     font-size: 20px;
+    margin-bottom: 60px;
 }
 
 .review-description-box{
@@ -453,6 +454,42 @@ select{
     margin-bottom: 10px;
 }
 
+/* REVIEW INDEX */
+
+#col-review-stream{
+    padding: 0 !important;
+    justify-content: center;
+    text-align: center;
+}
+
+.subject-anchor{
+    color: rgb(51, 99, 172)
+}
+
+.subject-anchor:hover{
+    text-decoration: none;
+    color: rgb(51, 99, 172)
+}
+
+#write-review-button-container{
+    position: absolute;
+    bottom: 0;
+}
+
+
+#write-review-anchor{
+    color: white;
+    font-family: 'Raleway', sans-serif;
+}
+
+#write-review-stream-edit-container{
+    margin: 10px auto 0 auto;
+    position: absolute;
+    bottom: 0;
+}
+
+
+
 /* GENERAL */
 
 textarea{
@@ -468,4 +505,3 @@ h1{
     display:none;
     visibility: hidden;
 }
-

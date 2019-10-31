@@ -1,16 +1,16 @@
 <%- include("../partials/header.ejs") %>
 <div class="container-fluid">
     <a href="/" class="home-link">Contractor Ratings</a>
-    <h1><%=contractor.name%></h1>
+    <h1><%=searchedContractor.name%></h1>
     <h1>Write A Review</h1>
-    <form id="review-form" action="/reviews/contractors/<%=contractor._id%>" method="POST">
+    <form id="review-form" action="/reviews/contractors/<%=searchedContractor._id%>" method="POST">
         <div class="hidden-info">
-            <input name="subjectName" value="<%=contractor.name%>">
-            <input name="subjectUsername" value="<%=contractor.username%>">
-            <input name="subjectId" value="<%=contractor._id%>">
-            <input name="authorName" value="<%=reviewer.name%>">
-            <input name="authorUsername" value="<%=reviewer.username%>">
-            <input name="authorId" value="<%=reviewer._id%>">
+            <input name="subjectName" value="<%=searchedContractor.name%>">
+            <input name="subjectUsername" value="<%=searchedContractor.username%>">
+            <input name="subjectId" value="<%=searchedContractor._id%>">
+            <input name="authorName" value="<%=loggedReviewer.name%>">
+            <input name="authorUsername" value="<%=loggedReviewer.username%>">
+            <input name="authorId" value="<%=loggedReviewer._id%>">
         </div>
         <select name="rating">
             <option value="5" selected>5 Stars</option>

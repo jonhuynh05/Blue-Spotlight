@@ -1,19 +1,37 @@
 <%- include("../partials/header.ejs") %>
 <div class="container-fluid">
-    <a href="/" class="home-link">Contractor Ratings</a>
-    <h1>Reviews</h1>
-    <div class="row">
-    <%for (let i = 0; i < contractors.length; i++) {%>
-        <div class="col" id="contractors-container">
-            <a href="/reviews/contractors/<%=contractors[i]._id%>"><%=contractors[i].name%></a>
-        </div>
-        <div class="col" id="edit-button-container">
-            <div id="edit-anchor-container">
-                <a href="/reviews/contractors/<%=contractors[i]._id%>/writereview" class="edit-button">Write A Review</a>
+<%- include("../partials/navbar.ejs") %>
+    <div class="row" id="name-container">
+        <h1 id="your-reviews-header">Browse Contractors</h1>
+    </div>
+    <div>
+        <div class="row" id="review-stream-container">
+        <%for (let i = 0; i < contractors.length; i++) {%>
+            <div class="col-6" id="col-review-stream">
+                <div class="review-subject-box">
+                    <a class="subject-anchor" href="/reviews/contractors/<%=contractors[i]._id%>"><%=contractors[i].name%></a>
+                </div>
+                <div class="row">
+                    <%if(contractors[i].profileURL === ""){%>
+                        <div class="" id="">
+                        </div>
+                    <%} else{%>
+                        <div class="profile-photo" id="contractor-profile-photo" style="background-image: url(<%=contractors[i].profileURL%>);">
+                        </div>
+                    <%}%>
+                </div>
+                <div class="review-rating-box">
+                    Rating: <%=contractors[i].rating%>/5<br/>
+                </div>
+            <div class="col" id="write-review-button-container">
+                <div class="edit-anchor-container" id="review-stream-edit-container">
+                    <a href="/reviews/contractors/<%=contractors[i]._id%>/writereview" class="edit-button" id="write-review-anchor">Write A Review</a>
+                </div>
             </div>
         </div>
-    <%}%>
-    </div>
+        <%}%>
+        </div>
     <%= selfReviewMsg %>
+    </div>
 </div>
 <%- include("../partials/footer.ejs") %>

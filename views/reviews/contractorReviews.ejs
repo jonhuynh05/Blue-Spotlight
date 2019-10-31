@@ -2,16 +2,16 @@
 <div class="container-fluid">
     <a href="/" class="home-link">Contractor Ratings</a>
     <div class="row" id="name-container">
-        <h1><%=contractor.name%></h1>
+        <h1><%=searchedContractor.name%></h1>
     </div>
     <div class="row" id="profile-photo-container">
         <img src="" alt="" id="profile-photo">
     </div>
     <div class="row" id="stats-container">
-        <p>Stars: <%=contractor.rating%></p>
+        <p>Stars: <%=searchedContractor.rating%></p>
     </div>
     <div>
-        <%for (let i = 0; i < contractor.reviews.length; i++){%>
+        <%for (let i = 0; i < searchedContractor.reviews.length; i++){%>
             <%=foundReviews[i].rating%><br/>
             <%=foundReviews[i].description%><br/>
             <a href="/reviews/reviewers/<%=foundReviews[i].authorId%>">-- <%=foundReviews[i].authorName%></a><br/>

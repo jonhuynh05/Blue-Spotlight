@@ -17,10 +17,14 @@ const isLoggedIn = (req, res, next) => {
 router.get("/", isLoggedIn, async (req, res) => {
     try{
         const allContractors = await Contractor.find({});
+        const contractor = await Contractor.findOne({username: req.session.username});
+        const reviewer = await Reviewer.findOne({username: req.session.username});
         res.render("reviews/index.ejs", {
             accountType: req.session.type,
             contractors: allContractors,
-            selfReviewMsg: req.session.selfReviewMsg
+            selfReviewMsg: req.session.selfReviewMsg,
+            reviewer: reviewer,
+            contractor: contractor
         });
     }
     catch(err){
@@ -31,6 +35,8 @@ router.get("/", isLoggedIn, async (req, res) => {
 
 router.get("/contractors/:id", isLoggedIn, async (req, res) => {
     try{
+        const contractor = await Contractor.findOne({username: req.session.username});
+        const reviewer = await Reviewer.findOne({username: req.session.username});
         const searchedContractor = await Contractor.findById(req.params.id);
         const contractorReviews = [];
         const ratingArr = [];
@@ -46,8 +52,10 @@ router.get("/contractors/:id", isLoggedIn, async (req, res) => {
         await searchedContractor.save();
         res.render("reviews/contractorReviews.ejs", {
             accountType: req.session.type,
-            contractor: searchedContractor,
+            searchedContractor: searchedContractor,
             foundReviews: contractorReviews,
+            contractor: contractor,
+            reviewer: reviewer
         })
     }
     catch(err){
@@ -58,6 +66,8 @@ router.get("/contractors/:id", isLoggedIn, async (req, res) => {
 
 router.get("/reviewers/:id", isLoggedIn, async (req, res) => {
     try{
+        const contractor = await Contractor.findOne({username: req.session.username});
+        const reviewer = await Reviewer.findOne({username: req.session.username});
         const reviewerContractor = await Contractor.findById(req.params.id).populate({path: "writtenReviews"});
         const reviewerReviewer = await Reviewer.findById(req.params.id).populate({path: "writtenReviews"});
         if(reviewerContractor){
@@ -69,7 +79,9 @@ router.get("/reviewers/:id", isLoggedIn, async (req, res) => {
         else{
             res.render("reviews/reviewer.ejs", {
                 accountType: req.session.type,
-                reviewer: reviewerReviewer
+                reviewerReviewer: reviewerReviewer,
+                contractor: contractor,
+                reviewer: reviewer
             }) 
         }
     }
@@ -81,21 +93,27 @@ router.get("/reviewers/:id", isLoggedIn, async (req, res) => {
 
 router.get("/contractors/:id/writereview", isLoggedIn, async (req, res) => {
     try{
+        const contractor = await Contractor.findOne({username: req.session.username});
+        const reviewer = await Reviewer.findOne({username: req.session.username});
         const searchedContractor = await Contractor.findById(req.params.id);
         const loggedContractor = await Contractor.findOne({username: req.session.username});
         const loggedReviewer = await Reviewer.findOne({username: req.session.username});
         if(loggedContractor){
             res.render("reviews/writeReview.ejs", {
                 accountType: req.session.type,
-                contractor: searchedContractor,
-                reviewer: loggedContractor
+                searchedContractor: searchedContractor,
+                loggedReviewer: loggedContractor,
+                contractor: contractor,
+                reviewer: reviewer
             })
         }
         else{
             res.render("reviews/writeReview.ejs", {
                 accountType: req.session.type,
-                contractor: searchedContractor,
-                reviewer: loggedReviewer
+                searchedContractor: searchedContractor,
+                loggedReviewer: loggedReviewer,
+                contractor: contractor,
+                reviewer: reviewer
             })
         }
     }
