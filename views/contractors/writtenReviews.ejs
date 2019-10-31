@@ -9,7 +9,9 @@
             <%for (let i = 0; i < contractor.writtenReviews.length; i++){%>
                 <div class="col-6" >
                     <div class="review-subject-box">
-                        <%=foundReviews[i].subjectName%><br/>
+                        <a class="subject-anchor" href="/reviews/contractors/<%=reviewSubject[i]._id%>">
+                            <%=foundReviews[i].subjectName%>
+                        </a>
                     </div>
                     <div class="row">
                         <%if(reviewSubject[i].profileURL === ""){%>
@@ -17,6 +19,7 @@
                             </div>
                         <%} else{%>
                             <div class="profile-photo" id="contractor-profile-photo" style="background-image: url(<%=reviewSubject[i].profileURL%>);">
+                                <a id="profile-photo-link" href="/reviews/contractors/<%=reviewSubject[i]._id%>"></a>
                             </div>
                         <%}%>
                     </div>

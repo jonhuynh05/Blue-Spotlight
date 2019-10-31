@@ -211,7 +211,11 @@ select{
 #review-button{
     color: white;
     font-family: 'Raleway', sans-serif;
+}
 
+#review-button:hover{
+    color: white;
+    text-decoration: none;
 }
 
 /* NAV BAR */
@@ -322,6 +326,11 @@ select{
 
 #see-reviews-anchor{
     color: white;
+}
+
+#see-reviews-anchor{
+    color: white;
+    text-decoration: none;
 }
 
 .profile-photo{
@@ -497,6 +506,11 @@ select{
 #write-review-anchor{
     color: white;
     font-family: 'Raleway', sans-serif;
+}
+
+#write-review-anchor:hover{
+    color: white;
+    text-decoration: none;
 }
 
 #write-review-stream-edit-container{
