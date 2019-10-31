@@ -161,6 +161,10 @@ router.put("/:id",  async (req, res) =>{
             req.session.duplicate = "Email already exists. Please try another.";
             res.redirect("/reviewers/:id/edit");
         }
+        else if(req.body.name === "" || req.body.username === "" || req.body.email === ""){
+            req.session.duplicate = "Please ensure name, username, and email are filled out.";
+            res.redirect("/reviewers/:id/edit");
+        }
         else {
             if(bcrypt.compareSync(req.body.password, loggedInReviewer.password) === false){
                 if(req.body.password === ""){

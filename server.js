@@ -96,21 +96,21 @@ app.get("/register", (req, res) => {
 })
 
 app.post("/register", async (req, res) => {
-    console.log(req.body.contractor);
-    console.log(typeof(req.body.contractor))
     try{
-        console.log(req.body.contractor);
-        console.log(typeof(req.body.contractor))
         const foundContractorEmail = await Contractor.findOne({email: req.body.email});
         const foundReviewerEmail = await Reviewer.findOne({email: req.body.email});
-        const foundContractorUsername = await Contractor.findOne({email: req.body.username});
-        const foundReviewerUsername = await Reviewer.findOne({email: req.body.username});
+        const foundContractorUsername = await Contractor.findOne({username: req.body.username});
+        const foundReviewerUsername = await Reviewer.findOne({username: req.body.username});
         if(foundContractorEmail || foundReviewerEmail){
             req.session.duplicate = "Email already exists. Please try another.";
             res.redirect("/register");
         }
         else if(foundContractorUsername || foundReviewerUsername){
             req.session.duplicate = "Username already exists. Please try another.";
+            res.redirect("/register");
+        }
+        else if(req.body.name === "" || req.body.username === "" || req.body.email === "" || req.body.password === ""){
+            req.session.duplicate = "Please fill the form out completely.";
             res.redirect("/register");
         }
         else if(req.body.contractor ==="yes"){
