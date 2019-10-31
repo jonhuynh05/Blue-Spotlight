@@ -10,7 +10,7 @@
                 Profile Photo URL:<input type="text" name="profileURL" value="<%=contractor.profileURL%>"/><br/>
                 Email:<input type="text" name="email" value="<%=contractor.email%>"/><br/>
                 New Password:<input type="text" name="password"/><br/>
-                Phone Number:<input type="number" name="phoneNumber" value="<%=contractor.phoneNumber%>"/><br/>
+                Phone Number:<input type="tel" name="phoneNumber" pattern="[(][0-9]{3}[)][ ][0-9]{3}-[0-9]{4}" placeholder="(xxx) xxx-xxxx" value="<%=contractor.phoneNumber%>"/><br/>
                 <button type="submit">Submit</button><br/>
                 <%= duplicate %>
             </form>

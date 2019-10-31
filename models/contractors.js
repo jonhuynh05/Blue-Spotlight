@@ -4,7 +4,7 @@ const contractorSchema = new mongoose.Schema({
     name: {type: String, required: true},
     email: {type: String, required: true, unique: true},
     password: {type: String, required: true},
-    phoneNumber: Number,
+    phoneNumber: String,
     contractor: Boolean,
     followerCount: Number,
     rating: Number,

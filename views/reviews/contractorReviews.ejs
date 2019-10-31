@@ -2,15 +2,15 @@
 <div class="container-fluid">
 <%- include("../partials/navbar.ejs") %>
     <div class="row">
-        <div class="col-lg-3 col-sm-6" id="profile-left">
             <%if(searchedContractor.profileURL === ""){%>
                 <div class="" id="">
                 </div>
             <%} else{%>
+            <div class="col-lg-3 col-sm-6" id="profile-left">
                 <div class="profile-photo" id="contractor-profile-photo" style="background-image: url(<%=searchedContractor.profileURL%>);">
                 </div>
+            </div>
             <%}%>
-        </div>
     <div class="col-lg-3 col-sm-6" id="profile-right">
         <div class="row" id="name-info-row">
             <p id="name-info"><%=searchedContractor.name%></p><br/>

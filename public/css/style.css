@@ -489,7 +489,7 @@ select{
 }
 
 .subject-anchor{
-    color: rgb(51, 99, 172)
+    /* color: rgb(51, 99, 172) */
 }
 
 .subject-anchor:hover{

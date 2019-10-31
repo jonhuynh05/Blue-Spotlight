@@ -11,9 +11,9 @@
             <%for (let i = 0; i < reviewerReviewer.writtenReviews.length; i++){%>
             <div class="col-6">
                 <div class="review-subject-box">
-                <!-- <a class="subject-anchor" href="/reviews/contractors/<%=reviewerReviewer.writtenReviews[i]._id%>"> -->
-                    <%=reviewerReviewer.writtenReviews[i].subjectName%>
-                <!-- </a> -->
+                    <a class="subject-anchor" href="/reviews/contractors/<%=reviewerReviewer.writtenReviews[i].subjectId%>">
+                        <%=reviewerReviewer.writtenReviews[i].subjectName%>
+                    </a>
                 </div>
                 <div class="review-rating-box" id="user-review-stream-rating-box">
                     <%=reviewerReviewer.writtenReviews[i].rating%>/5
