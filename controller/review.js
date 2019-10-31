@@ -105,6 +105,7 @@ router.get("/reviewers/:id", isLoggedIn, async (req, res) => {
 
 router.get("/contractors/:id/writereview", isLoggedIn, async (req, res) => {
     try{
+        req.session.selfReviewMsg = ""
         const contractor = await Contractor.findOne({username: req.session.username});
         const reviewer = await Reviewer.findOne({username: req.session.username});
         const searchedContractor = await Contractor.findById(req.params.id);
@@ -150,18 +151,59 @@ router.get("/", (req, res) => {
 
 router.post("/contractors/:id", async (req, res) => {
     try{
+        const contractor = await Contractor.findOne({username: req.session.username});
+        const reviewer = await Reviewer.findOne({username: req.session.username});
         const loggedContractor = await Contractor.findOne({username: req.session.username});
         const loggedReviewer = await Reviewer.findOne({username: req.session.username});
         const reviewedContractor = await Contractor.findById(req.params.id);
         const foundExistingReview = await Review.findOne({subjectId: req.params.id, authorUsername: req.session.username})
         if(loggedContractor && loggedContractor.username === reviewedContractor.username){
             req.session.selfReviewMsg = `Unable to submit. Please remember you can't write a review about yourself, ${loggedContractor.name}.`
-            res.redirect("/reviews/contractors/"+req.params.id+"/writereview");
+            // res.redirect("/reviews/contractors/"+req.params.id+"/writereview");
+            if(loggedContractor){
+                res.render("reviews/writeReview.ejs", {
+                    accountType: req.session.type,
+                    searchedContractor: reviewedContractor,
+                    loggedReviewer: loggedContractor,
+                    contractor: contractor,
+                    reviewer: reviewer,
+                    selfReviewMsg: req.session.selfReviewMsg
+                })
+            }
+            else{
+                res.render("reviews/writeReview.ejs", {
+                    accountType: req.session.type,
+                    searchedContractor: reviewedContractor,
+                    loggedReviewer: loggedReviewer,
+                    contractor: contractor,
+                    reviewer: reviewer,
+                    selfReviewMsg: req.session.selfReviewMsg
+                })
+            }
         }
         else if(foundExistingReview){
             req.session.selfReviewMsg = `Unable to submit. Please note you have already written a review about ${reviewedContractor.name}.`
-            res.end()
-            res.redirect("/reviews/contractors/"+req.params.id+"/writereview");
+            // res.redirect("/reviews/contractors/"+req.params.id+"/writereview");
+            if(loggedContractor){
+                res.render("reviews/writeReview.ejs", {
+                    accountType: req.session.type,
+                    searchedContractor: reviewedContractor,
+                    loggedReviewer: loggedContractor,
+                    contractor: contractor,
+                    reviewer: reviewer,
+                    selfReviewMsg: req.session.selfReviewMsg
+                })
+            }
+            else{
+                res.render("reviews/writeReview.ejs", {
+                    accountType: req.session.type,
+                    searchedContractor: reviewedContractor,
+                    loggedReviewer: loggedReviewer,
+                    contractor: contractor,
+                    reviewer: reviewer,
+                    selfReviewMsg: req.session.selfReviewMsg
+                })
+            }
         }
         else if(loggedContractor && loggedContractor.username !== reviewedContractor.username){
             const newReview = await Review.create(req.body)
