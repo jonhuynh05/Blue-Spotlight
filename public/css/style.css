@@ -525,7 +525,57 @@ select{
     display: block;
 }
 
+/* CONTRACTOR REVIEW STREAM */
 
+#contractor-review-stream-header-container{
+    margin: 80px 0 10px 0;
+}
+
+#contractor-review-stream-header{
+    color: rgb(51, 99, 172);
+    font-size: 40px;
+}
+
+#contractor-review-stream-rating-container{
+    padding: 20px;
+    font-family: 'Raleway', sans-serif;
+    color: rgb(51, 99, 172);
+    font-size: 20px;
+}
+
+#rating-and-description-row{
+    margin-bottom: 70px;
+}
+
+#rating-in-stream{
+    color: rgb(51, 99, 172);
+    font-size: 30px;  
+    font-family: 'Raleway', sans-serif;
+    text-align: center;
+}
+
+#description-in-stream{
+    color: black;
+    font-size: 15px;  
+    text-align: left;
+    border-left: 3px solid rgb(51, 99, 172);
+    border-right: 3px solid rgb(51, 99, 172);
+}
+
+#reviewer-profile-link-container{
+
+}
+
+.reviewer-profile-link{
+    font-size: 20px;
+}
+
+#author-in-stream{
+}
+
+#review-button-container{
+    margin-bottom: 50px;
+}
 
 /* GENERAL */
 

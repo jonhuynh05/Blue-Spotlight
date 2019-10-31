@@ -77,7 +77,9 @@ router.get("/reviewers/:id", isLoggedIn, async (req, res) => {
         if(reviewerContractor){
             res.render("reviews/reviewer.ejs", {
                 accountType: req.session.type,
-                reviewer: reviewerContractor
+                reviewerReviewer: reviewerContractor,
+                contractor: contractor,
+                reviewer: reviewer
             })
         }
         else{

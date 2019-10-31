@@ -1,25 +1,37 @@
 <%- include("../partials/header.ejs") %>
 <div class="container-fluid">
-    <a href="/" class="home-link">Contractor Ratings</a>
-    <div class="row" id="name-container">
-        <h1><%=searchedContractor.name%></h1>
+<%- include("../partials/navbar.ejs") %>
+    <div class="row" id="contractor-review-stream-header-container">
+        <h1 id="contractor-review-stream-header"><%=searchedContractor.name%></h1>
     </div>
-    <div class="row" id="profile-photo-container">
-        <img src="" alt="" id="profile-photo">
-    </div>
-    <div class="row" id="stats-container">
-        <p>Stars: <%=searchedContractor.rating%></p>
-    </div>
-    <div>
-        <%for (let i = 0; i < searchedContractor.reviews.length; i++){%>
-            <%=foundReviews[i].rating%><br/>
-            <%=foundReviews[i].description%><br/>
-            <a href="/reviews/reviewers/<%=foundReviews[i].authorId%>">-- <%=foundReviews[i].authorName%></a><br/>
+    <div class="row">
+        <%if(searchedContractor.profileURL === ""){%>
+            <div class="" id="">
+            </div>
+        <%} else{%>
+            <div class="profile-photo" id="contractor-profile-photo" style="background-image: url(<%=searchedContractor.profileURL%>);">
+            </div>
         <%}%>
     </div>
+    <div class="row" id="contractor-review-stream-rating-container">
+        Rating: <%=searchedContractor.rating%>/5
+    </div>
+        <%for (let i = 0; i < searchedContractor.reviews.length; i++){%>
+            <div class="row" id="rating-and-description-row">
+                <div class="col-2" id="rating-in-stream">
+                    <%=foundReviews[i].rating%>
+                </div>
+                <div class="col-8" id="description-in-stream">
+                    <%=foundReviews[i].description%>
+                </div>
+                <div class="col-2" id="author-in-stream">
+                    <a class="reviewer-profile-link" href="/reviews/reviewers/<%=foundReviews[i].authorId%>"><%=foundReviews[i].authorName%></a>
+                </div>
+            </div>
+        <%}%>
     <div class="row" id="review-button-container">
         <div id="review-anchor-container">
-            <a href="/reviews" class="review-button">Find Contractors</a>
+            <a href="/reviews" id="review-button">Find Contractors</a>
         </div>
     </div>
 </div>

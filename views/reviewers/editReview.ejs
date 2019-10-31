@@ -10,7 +10,7 @@
     <div id="edit-review-container">
         <form id="edit-form" action="/reviewers/<%=reviewer._id%>/written-reviews/edit/<%=review._id%>?_method=PUT" method="POST">
             <div class="row">
-                <textarea name="description" type="text" placeholder="Describe Your Experience"><%=review.description%></textarea>
+                <textarea name="description" type="text" placeholder="Describe Your Experience. Max 5000 characters." maxlength="5000"><%=review.description%></textarea>
             </div>
             <div class="row">
                 <select name="rating">
