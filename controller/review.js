@@ -20,13 +20,13 @@ const roundToTwoDecimalPlaces = (num) => {
 
 router.get("/", isLoggedIn, async (req, res) => {
     try{
+        req.session.selfReviewMsg = ""
         const allContractors = await Contractor.find({});
         const contractor = await Contractor.findOne({username: req.session.username});
         const reviewer = await Reviewer.findOne({username: req.session.username});
         res.render("reviews/index.ejs", {
             accountType: req.session.type,
             contractors: allContractors,
-            selfReviewMsg: req.session.selfReviewMsg,
             reviewer: reviewer,
             contractor: contractor
         });
@@ -49,11 +49,13 @@ router.get("/contractors/:id", isLoggedIn, async (req, res) => {
             ratingArr.push(foundReview.rating);
             contractorReviews.push(foundReview);
         }
-        const avgRating = ratingArr.reduce( function (a, b) {
-            return a + b
-        }, 0)/ratingArr.length;
-        searchedContractor.rating = roundToTwoDecimalPlaces(avgRating);
-        await searchedContractor.save();
+        if(searchedContractor.rating > 0){
+            const avgRating = ratingArr.reduce( function (a, b) {
+                return a + b
+            }, 0)/ratingArr.length;
+            searchedContractor.rating = roundToTwoDecimalPlaces(avgRating);
+            await searchedContractor.save();
+        }
         res.render("reviews/contractorReviews.ejs", {
             accountType: req.session.type,
             searchedContractor: searchedContractor,
@@ -110,7 +112,8 @@ router.get("/contractors/:id/writereview", isLoggedIn, async (req, res) => {
                 searchedContractor: searchedContractor,
                 loggedReviewer: loggedContractor,
                 contractor: contractor,
-                reviewer: reviewer
+                reviewer: reviewer,
+                selfReviewMsg: req.session.selfReviewMsg
             })
         }
         else{
@@ -119,7 +122,8 @@ router.get("/contractors/:id/writereview", isLoggedIn, async (req, res) => {
                 searchedContractor: searchedContractor,
                 loggedReviewer: loggedReviewer,
                 contractor: contractor,
-                reviewer: reviewer
+                reviewer: reviewer,
+                selfReviewMsg: req.session.selfReviewMsg
             })
         }
     }
@@ -147,8 +151,8 @@ router.post("/contractors/:id", async (req, res) => {
         const reviewedContractor = await Contractor.findById(req.params.id);
         const newReview = await Review.create(req.body)
         if(loggedContractor && loggedContractor.username === reviewedContractor.username){
-            req.session.selfReviewMsg = "You can't write a review about yourself."
-            res.redirect("/reviews");
+            req.session.selfReviewMsg = `Please remember you can't write a review about yourself, ${loggedContractor.name}.`
+            res.redirect("/reviews/contractors/"+req.params.id+"/writereview");
         }
         else if(loggedContractor && loggedContractor.username !== reviewedContractor.username){
             req.session.selfReviewMsg = "";
