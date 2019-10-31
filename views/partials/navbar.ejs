@@ -9,9 +9,18 @@
         <li class="nav-item" id="contractor-nav-show">
             <a class="nav-link" href="/contractors/<%=contractor._id%>">Profile</a>
         </li>
+        <li class="nav-item" id="contractor-nav-show">
+            <a class="nav-link" href="/contractors/<%=contractor._id%>/written-reviews">Your Reviews</a>
+        </li>
+        <li class="nav-item" id="contractor-nav-show">
+            <a class="nav-link" href="/reviews/contractors/<%=contractor._id%>">Reviews About You</a>
+        </li>
         <% } else if(accountType === "reviewer") {%>
         <li class="nav-item" id="reviewer-nav-show">
             <a class="nav-link" href="/reviewers/<%=reviewer._id%>">Profile</a>
+        </li>
+        <li class="nav-item" id="reviewer-nav-show">
+            <a class="nav-link" href="/reviewers/<%=reviewer._id%>/written-reviews">Your Reviews</a>
         </li>
         <% } %>
         <li class="nav-item">
