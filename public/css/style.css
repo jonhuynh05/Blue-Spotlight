@@ -586,6 +586,7 @@ select{
     color: black;
     font-size: 15px;  
     text-align: left;
+    word-wrap: break-word;
 }
 
 #reviewer-profile-link-container{

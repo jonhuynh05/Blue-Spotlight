@@ -1,26 +1,33 @@
 <%- include("../partials/header.ejs") %>
 <div class="container-fluid">
-    <a href="/" class="home-link">Contractor Ratings</a>
-    <h1><%=searchedContractor.name%></h1>
-    <h1>Write A Review</h1>
-    <form id="review-form" action="/reviews/contractors/<%=searchedContractor._id%>" method="POST">
-        <div class="hidden-info">
-            <input name="subjectName" value="<%=searchedContractor.name%>">
-            <input name="subjectUsername" value="<%=searchedContractor.username%>">
-            <input name="subjectId" value="<%=searchedContractor._id%>">
-            <input name="authorName" value="<%=loggedReviewer.name%>">
-            <input name="authorUsername" value="<%=loggedReviewer.username%>">
-            <input name="authorId" value="<%=loggedReviewer._id%>">
-        </div>
-        <select name="rating">
-            <option value="5" selected>5 Stars</option>
-            <option value="4">4 Stars</option>
-            <option value="3">3 Stars</option>
-            <option value="2">2 Stars</option>
-            <option value="1">1 Stars</option>
-        </select>
-        <textarea name="description" type="text" placeholder="Describe Your Experience. Max 5000 characters." maxlength="5000"></textarea>
-        <button type="submit">Submit</button>
-    </form>
+<%- include("../partials/navbar.ejs") %>
+    <div class="row" id="edit-header-container">
+        <h1 id="edit-review-header">Write A Review About <%=searchedContractor.name%></h1>
+    </div>
+    <div id="edit-review-container">
+        <form id="edit-form" action="/reviews/contractors/<%=searchedContractor._id%>" method="POST">
+            <div class="hidden-info">
+                <input name="subjectName" value="<%=searchedContractor.name%>">
+                <input name="subjectUsername" value="<%=searchedContractor.username%>">
+                <input name="subjectId" value="<%=searchedContractor._id%>">
+                <input name="authorName" value="<%=loggedReviewer.name%>">
+                <input name="authorUsername" value="<%=loggedReviewer.username%>">
+                <input name="authorId" value="<%=loggedReviewer._id%>">
+            </div>
+            <div class="row">
+                <textarea name="description" type="text" placeholder="Describe Your Experience. Max 5000 characters." maxlength="5000"></textarea>
+            </div>
+            <div class="row">
+                <select name="rating">
+                    <option value="5" selected>5 Stars</option>
+                    <option value="4">4 Stars</option>
+                    <option value="3">3 Stars</option>
+                    <option value="2">2 Stars</option>
+                    <option value="1">1 Stars</option>
+                </select>
+            </div>
+            <button class="submit-button" type="submit">Submit</button>
+        </form>
+    </div> 
 </div>
 <%- include("../partials/footer.ejs") %>
