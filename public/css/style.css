@@ -304,6 +304,7 @@ select{
     margin-top: 30px;
     font-family: 'Raleway', sans-serif;
     padding: 5px;
+    justify-content: center;
 }
 
 #edit-button{
@@ -395,7 +396,7 @@ select{
 
 #review-stream-container{
     text-align: center;
-    padding: 0 30px;
+    padding: 0 60px;
 }
 
 .review-subject-box{
@@ -416,14 +417,29 @@ select{
     font-family: 'Raleway', sans-serif;
     color: black;
     font-size: 15px;
+    width: 100%;
+    word-wrap: break-word;
 }
 
 .col-6{
-    margin-bottom: 40px;
+    padding: 0 30px !important;
+    margin-bottom: 80px;
+    text-align: center;
+}
+
+#contractor-edit-review-button-container{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    justify-content: center;
 }
 
 #your-reviews-header{
     color: rgb(51, 99, 172);
+}
+
+#user-review-stream-rating-box{
+    margin-bottom: 0 !important;
 }
 
 /* EDIT REVIEW */
@@ -485,7 +501,7 @@ select{
 #write-review-stream-edit-container{
     margin: 10px auto 0 auto;
     position: absolute;
-    bottom: 0;
+    
 }
 
 #profile-photo-link{

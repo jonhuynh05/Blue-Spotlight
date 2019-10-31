@@ -24,12 +24,12 @@
                 <div class="review-rating-box">
                     Rating: <%=contractors[i].rating%>/5<br/>
                 </div>
-            <div class="col" id="write-review-button-container">
-                <div class="edit-anchor-container" id="review-stream-edit-container">
-                    <a href="/reviews/contractors/<%=contractors[i]._id%>/writereview" class="edit-button" id="write-review-anchor">Write A Review</a>
+                <div class="col" id="write-review-button-container">
+                    <div class="edit-anchor-container" id="review-stream-edit-container">
+                        <a href="/reviews/contractors/<%=contractors[i]._id%>/writereview" class="edit-button" id="write-review-anchor">Write A Review</a>
+                    </div>
                 </div>
             </div>
-        </div>
         <%}%>
         </div>
     <%= selfReviewMsg %>
