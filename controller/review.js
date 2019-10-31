@@ -49,7 +49,11 @@ router.get("/contractors/:id", isLoggedIn, async (req, res) => {
             ratingArr.push(foundReview.rating);
             contractorReviews.push(foundReview);
         }
-        if(searchedContractor.rating > 0){
+        if(searchedContractor.rating === 0 && searchedContractor.reviews.length === 0){
+            searchedContractor.rating = 0
+            await searchedContractor.save();
+        }
+        else{
             const avgRating = ratingArr.reduce( function (a, b) {
                 return a + b
             }, 0)/ratingArr.length;
@@ -149,12 +153,18 @@ router.post("/contractors/:id", async (req, res) => {
         const loggedContractor = await Contractor.findOne({username: req.session.username});
         const loggedReviewer = await Reviewer.findOne({username: req.session.username});
         const reviewedContractor = await Contractor.findById(req.params.id);
-        const newReview = await Review.create(req.body)
+        const foundExistingReview = await Review.findOne({subjectId: req.params.id, authorUsername: req.session.username})
         if(loggedContractor && loggedContractor.username === reviewedContractor.username){
-            req.session.selfReviewMsg = `Please remember you can't write a review about yourself, ${loggedContractor.name}.`
+            req.session.selfReviewMsg = `Unable to submit. Please remember you can't write a review about yourself, ${loggedContractor.name}.`
+            res.redirect("/reviews/contractors/"+req.params.id+"/writereview");
+        }
+        else if(foundExistingReview){
+            req.session.selfReviewMsg = `Unable to submit. Please note you have already written a review about ${reviewedContractor.name}.`
+            res.end()
             res.redirect("/reviews/contractors/"+req.params.id+"/writereview");
         }
         else if(loggedContractor && loggedContractor.username !== reviewedContractor.username){
+            const newReview = await Review.create(req.body)
             req.session.selfReviewMsg = "";
             loggedContractor.writtenReviews.push(newReview);
             await loggedContractor.save();
@@ -164,6 +174,7 @@ router.post("/contractors/:id", async (req, res) => {
             console.log(newReview)
         }
         else{
+            const newReview = await Review.create(req.body)
             req.session.selfReviewMsg = "";
             loggedReviewer.writtenReviews.push(newReview)
             await loggedReviewer.save();
