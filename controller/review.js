@@ -14,6 +14,10 @@ const isLoggedIn = (req, res, next) => {
     }
 }
 
+const roundToTwoDecimalPlaces = (num) => {    
+    return +(Math.round(num + "e+2")  + "e-2");
+}
+
 router.get("/", isLoggedIn, async (req, res) => {
     try{
         const allContractors = await Contractor.find({});
@@ -48,7 +52,7 @@ router.get("/contractors/:id", isLoggedIn, async (req, res) => {
         const avgRating = ratingArr.reduce( function (a, b) {
             return a + b
         }, 0)/ratingArr.length;
-        searchedContractor.rating = avgRating;
+        searchedContractor.rating = roundToTwoDecimalPlaces(avgRating);
         await searchedContractor.save();
         res.render("reviews/contractorReviews.ejs", {
             accountType: req.session.type,
