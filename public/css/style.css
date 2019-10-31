@@ -488,6 +488,12 @@ select{
     bottom: 0;
 }
 
+#profile-photo-link{
+    height: 100%;
+    width: 100%;
+    display: block;
+}
+
 
 
 /* GENERAL */
