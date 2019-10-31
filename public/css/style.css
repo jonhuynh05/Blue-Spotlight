@@ -110,7 +110,20 @@ input{
     margin-bottom: 20px !important;
     margin-left: 15px !important;
     margin-top: 10px !important;
+}
 
+input::-webkit-input-placeholder {
+    font-size: 12px;
+}
+
+input::-moz-placeholder { /* Firefox 19+ */
+    font-size: 12pt; 
+}
+input:-ms-input-placeholder { /* IE 10+ */
+    font-size: 12pt; 
+}
+input:-moz-placeholder { /* Firefox 18- */
+    font-size: 12pt;
 }
 
 select{

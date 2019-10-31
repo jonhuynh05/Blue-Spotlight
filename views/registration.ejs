@@ -6,8 +6,8 @@
             <form id="register-form" action="/register" method="POST">
                 <h1 id="register-header">Register</h1>
                 Name:<input type="text" name="name"/><br/>
-                Username:<input type="text" name="username"/><br/>
-                Email:<input type="text" name="email"/><br/>
+                Username:<input type="text" name="username" pattern="[^' ']+" placeholder="no spaces"/><br/>
+                Email:<input type="text" pattern="[^' ']+" name="email" placeholder="no spaces"/><br/>
                 Account Type:<select name="contractor">
                         <option value="yes">Contractor</option>
                         <option value="no">Reviewer</option>

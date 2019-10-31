@@ -113,6 +113,10 @@ app.post("/register", async (req, res) => {
             req.session.duplicate = "Please fill the form out completely.";
             res.redirect("/register");
         }
+        // else if(req.body.username.value.match(/\s|\./g)){
+        //     req.session.duplicate = "Please do not use spaces.";
+        //     res.redirect("/register");
+        // }
         else if(req.body.contractor ==="yes"){
             const password = req.body.password;
             const passwordHash = bcrypt.hashSync(password, bcrypt.genSaltSync(10));
