@@ -131,8 +131,6 @@ app.post("/register", async (req, res) => {
             req.session.logged = true;
             req.session.duplicate = "";
             req.session.mustlogin = ""
-            console.log(newContractor)
-            console.log(req.session)
             res.redirect("/contractors");
         }
         else{
@@ -146,7 +144,6 @@ app.post("/register", async (req, res) => {
             reviewerDbEntry.password = passwordHash;
             reviewerDbEntry.reviewCount = 0;
             const newReviewer = await Reviewer.create(reviewerDbEntry);
-            console.log(newReviewer)
             req.session.username = newReviewer.username;
             req.session.type = "reviewer";
             req.session.logged = true;
