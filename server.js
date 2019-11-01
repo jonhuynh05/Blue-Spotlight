@@ -14,7 +14,6 @@ require("./db/db")
 
 
 
-// app.use(isLoggedIn)
 app.use(express.static("public"));
 app.use(session({
     secret: "random string",
