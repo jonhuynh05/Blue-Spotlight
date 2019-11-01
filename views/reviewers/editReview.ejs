@@ -23,8 +23,13 @@
                     <%}%>
                 </select>
             </div>
-            <button class="submit-button" type="submit">Submit</button>
+            <div class="row">
+                <button class="submit-button" id="submit-edit-review" type="submit">Submit</button>
         </form>
+                <form action="/reviewers/<%=reviewer._id%>/written-reviews">
+                    <button class="submit-button" id="cancel-edit-review" type="submit">Cancel</button>
+                </form>
+            </div>
         <form action="/reviewers/<%=reviewer._id%>/written-reviews/edit/<%=review._id%>?_method=DELETE" method="POST">
             <button class="delete-button" type="submit">Delete Review</button>
         </form>
