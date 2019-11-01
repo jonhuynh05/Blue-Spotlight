@@ -15,9 +15,10 @@ const isLoggedIn = (req, res, next) => {
     }
 }
 
+//REVIEWER INDEX
+
 router.get("/", isLoggedIn, async (req, res) => {
     try{
-        console.log(req.session)
         const loggedInReviewer = await Reviewer.findOne({username: req.session.username});
         res.render("reviewers/index.ejs", {
             accountType: req.session.type,
@@ -29,6 +30,8 @@ router.get("/", isLoggedIn, async (req, res) => {
         console.log(err);
     }
 })
+
+//REVIEWER SHOW PAGE
 
 router.get("/:id", isLoggedIn, async (req, res) => {
     try{
@@ -43,6 +46,8 @@ router.get("/:id", isLoggedIn, async (req, res) => {
         console.log(err)
     }
 })
+
+//REVIEWER SUBMITTED REVIEWS
 
 router.get("/:id/written-reviews", isLoggedIn, async (req, res) => {
     try{
@@ -69,12 +74,12 @@ router.get("/:id/written-reviews", isLoggedIn, async (req, res) => {
     }
 })
 
+//REVIEWER EDIT REVIEWS
+
 router.get("/:id/written-reviews/edit/:revid", isLoggedIn, async (req, res) => {
     try{
         const loggedInReviewer = await Reviewer.findOne({username: req.session.username});
         const foundReview = await Review.findById(req.params.revid);
-        console.log(loggedInReviewer)
-        console.log(foundReview)
         res.render("reviewers/editReview.ejs", {
             accountType: req.session.type,
             reviewer: loggedInReviewer,
@@ -86,6 +91,8 @@ router.get("/:id/written-reviews/edit/:revid", isLoggedIn, async (req, res) => {
         console.log(err)
     }
 })
+
+//REVIEWER EDIT PROFILE
 
 router.get("/:id/edit", isLoggedIn, async (req, res) => {
     try{
@@ -102,6 +109,8 @@ router.get("/:id/edit", isLoggedIn, async (req, res) => {
     }
 })
 
+//LOGOUT
+
 router.get("/", (req, res) => {
     try{
         req.session.destroy();
@@ -113,10 +122,11 @@ router.get("/", (req, res) => {
     }
 })
 
+//REVIEWER EDIT REVIEW PUT ROUTE
+
 router.put("/:id/written-reviews/edit/:revid", async (req, res) => {
     try{
         const updatedReview = await Review.findByIdAndUpdate(req.params.revid,req.body, {new: true});
-        console.log(updatedReview)
         res.redirect("/reviewers/"+req.params.id+"/written-reviews")
     }
     catch(err){
@@ -125,6 +135,7 @@ router.put("/:id/written-reviews/edit/:revid", async (req, res) => {
     }
 })
 
+//REVIEWER DELETE REVIEW
 
 router.delete("/:id/written-reviews/edit/:revid", async (req, res) => {
     try{
@@ -145,6 +156,8 @@ router.delete("/:id/written-reviews/edit/:revid", async (req, res) => {
         console.log(err)
     }
 })
+
+//REVIEWER EDIT PROFILE PUT ROUTE
 
 router.put("/:id",  async (req, res) =>{
     try{
@@ -206,8 +219,6 @@ router.put("/:id",  async (req, res) =>{
                 req.session.username = updatedReviewer.username;
                 req.session.name = updatedReviewer.name;
                 req.session.duplicate = "";
-                console.log(updatedReviewer)
-                console.log(req.session)
                 res.redirect("/reviewers/"+req.params.id);
             }
         }
@@ -217,6 +228,8 @@ router.put("/:id",  async (req, res) =>{
         console.log(err)
     }
 })
+
+//REVIEWER DELETE PROFILE
 
 router.delete("/:id", async (req, res) => {
     try{

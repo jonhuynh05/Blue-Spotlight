@@ -15,6 +15,8 @@ const isLoggedIn = (req, res, next) => {
     }
 }
 
+//CONTRACTOR INDEX
+
 router.get("/", isLoggedIn, async (req, res) => {
     try{
         console.log(req.session)
@@ -30,6 +32,8 @@ router.get("/", isLoggedIn, async (req, res) => {
     }
 })
 
+//CONTRACTOR SHOW PAGE
+
 router.get("/:id", isLoggedIn, async (req, res) => {
     try{
         const foundContractor = await Contractor.findOne({username: req.session.username});
@@ -43,6 +47,8 @@ router.get("/:id", isLoggedIn, async (req, res) => {
         console.log(err)
     }
 })
+
+//CONTRACTOR SUBMITTED REVIEWS
 
 router.get("/:id/written-reviews", isLoggedIn, async (req, res) => {
     try{
@@ -69,6 +75,8 @@ router.get("/:id/written-reviews", isLoggedIn, async (req, res) => {
     }
 })
 
+//CONTRACTOR EDIT PROFILE
+
 router.get("/:id/edit", isLoggedIn, async (req, res) => {
     try{
         const foundContractor = await Contractor.findOne({username: req.session.username});
@@ -84,12 +92,12 @@ router.get("/:id/edit", isLoggedIn, async (req, res) => {
     }
 })
 
+//CONTRACTOR EDIT REVIEW
+
 router.get("/:id/written-reviews/edit/:revid", isLoggedIn, async (req, res) => {
     try{
         const loggedInContractor = await Contractor.findOne({username: req.session.username});
         const foundReview = await Review.findById(req.params.revid);
-        console.log(loggedInContractor)
-        console.log(foundReview)
         res.render("contractors/editReview.ejs", {
             accountType: req.session.type,
             contractor: loggedInContractor,
@@ -102,6 +110,8 @@ router.get("/:id/written-reviews/edit/:revid", isLoggedIn, async (req, res) => {
     }
 })
 
+//LOGOUT
+
 router.get("/", (req, res) => {
     try{
         req.session.destroy();
@@ -113,10 +123,11 @@ router.get("/", (req, res) => {
     }
 })
 
+//CONTRACTOR EDIT REVIEW PUT ROUTE
+
 router.put("/:id/written-reviews/edit/:revid", async (req, res) => {
     try{
         const updatedReview = await Review.findByIdAndUpdate(req.params.revid,req.body, {new: true});
-        console.log(updatedReview)
         res.redirect("/contractors/"+req.params.id+"/written-reviews")
     }
     catch(err){
@@ -124,6 +135,8 @@ router.put("/:id/written-reviews/edit/:revid", async (req, res) => {
         console.log(err)
     }
 })
+
+//CONTRACTOR EDIT PROFILE PUT ROUTE
 
 router.put("/:id", async (req, res) => {
     try{
@@ -157,8 +170,6 @@ router.put("/:id", async (req, res) => {
                     req.session.username = updatedContractor.username;
                     req.session.name = updatedContractor.name;
                     req.session.duplicate = "";
-                    console.log(updatedContractor)
-                    console.log(req.session)
                     res.redirect("/contractors/"+req.params.id);
                 }
                 else{
@@ -174,8 +185,6 @@ router.put("/:id", async (req, res) => {
                     req.session.username = updatedContractor.username;
                     req.session.name = updatedContractor.name;
                     req.session.duplicate = "";
-                    console.log(updatedContractor)
-                    console.log(req.session)
                     res.redirect("/contractors/"+req.params.id);
                 }
             }
@@ -189,8 +198,6 @@ router.put("/:id", async (req, res) => {
                 req.session.username = updatedContractor.username;
                 req.session.name = updatedContractor.name;
                 req.session.duplicate = "";
-                console.log(updatedContractor)
-                console.log(req.session)
                 res.redirect("/contractors/"+req.params.id);
             }
         }
@@ -200,6 +207,8 @@ router.put("/:id", async (req, res) => {
         console.log(err)
     }
 })
+
+//DELETE PROFILE
 
 router.delete("/:id", async (req, res) => {
     try{
@@ -233,6 +242,7 @@ router.delete("/:id", async (req, res) => {
     }
 })
 
+//DELETE REVIEW
 
 router.delete("/:id/written-reviews/edit/:revid", async (req, res) => {
     try{

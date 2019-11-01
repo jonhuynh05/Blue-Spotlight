@@ -30,7 +30,6 @@ app.use("/reviews", reviewController);
 // HOME ROUTE
 
 app.get("/", (req, res) => {
-    console.log(req.session)
     res.render("home.ejs")
 })
 

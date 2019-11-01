@@ -13,10 +13,11 @@ const isLoggedIn = (req, res, next) => {
         res.redirect("/login")
     }
 }
-
 const roundToTwoDecimalPlaces = (num) => {    
     return +(Math.round(num + "e+2")  + "e-2");
 }
+
+//FIND CONTRACTORS HOME PAGE
 
 router.get("/", isLoggedIn, async (req, res) => {
     try{
@@ -36,6 +37,8 @@ router.get("/", isLoggedIn, async (req, res) => {
         console.log(err);
     }
 })
+
+//SEE REVIEWS OF A CONTRACTOR
 
 router.get("/contractors/:id", isLoggedIn, async (req, res) => {
     try{
@@ -74,6 +77,8 @@ router.get("/contractors/:id", isLoggedIn, async (req, res) => {
     }
 })
 
+//SEE REVIEWS OF A REVIEWER
+
 router.get("/reviewers/:id", isLoggedIn, async (req, res) => {
     try{
         const contractor = await Contractor.findOne({username: req.session.username});
@@ -102,6 +107,8 @@ router.get("/reviewers/:id", isLoggedIn, async (req, res) => {
         console.log(err);
     }
 })
+
+//WRITE A REVIEW PAGE
 
 router.get("/contractors/:id/writereview", isLoggedIn, async (req, res) => {
     try{
@@ -138,6 +145,8 @@ router.get("/contractors/:id/writereview", isLoggedIn, async (req, res) => {
     }
 })
 
+//LOGOUT
+
 router.get("/", (req, res) => {
     try{
         req.session.destroy();
@@ -149,6 +158,8 @@ router.get("/", (req, res) => {
     }
 })
 
+//SUBMIT REVIEW
+
 router.post("/contractors/:id", async (req, res) => {
     try{
         const contractor = await Contractor.findOne({username: req.session.username});
@@ -159,7 +170,6 @@ router.post("/contractors/:id", async (req, res) => {
         const foundExistingReview = await Review.findOne({subjectId: req.params.id, authorUsername: req.session.username})
         if(loggedContractor && loggedContractor.username === reviewedContractor.username){
             req.session.selfReviewMsg = `Unable to submit. Please remember you can't write a review about yourself, ${loggedContractor.name}.`
-            // res.redirect("/reviews/contractors/"+req.params.id+"/writereview");
             if(loggedContractor){
                 res.render("reviews/writeReview.ejs", {
                     accountType: req.session.type,
@@ -183,7 +193,6 @@ router.post("/contractors/:id", async (req, res) => {
         }
         else if(foundExistingReview){
             req.session.selfReviewMsg = `Unable to submit. Please note you have already written a review about ${reviewedContractor.name}.`
-            // res.redirect("/reviews/contractors/"+req.params.id+"/writereview");
             if(loggedContractor){
                 res.render("reviews/writeReview.ejs", {
                     accountType: req.session.type,
@@ -213,7 +222,6 @@ router.post("/contractors/:id", async (req, res) => {
             reviewedContractor.reviews.push(newReview);
             await reviewedContractor.save();
             res.redirect("/reviews/contractors/" + reviewedContractor._id);
-            console.log(newReview)
         }
         else{
             const newReview = await Review.create(req.body)
@@ -223,8 +231,6 @@ router.post("/contractors/:id", async (req, res) => {
             reviewedContractor.reviews.push(newReview);
             await reviewedContractor.save();
             res.redirect("/reviews/contractors/" + reviewedContractor._id);
-            console.log(newReview)
-
         }
     }
     catch(err){
