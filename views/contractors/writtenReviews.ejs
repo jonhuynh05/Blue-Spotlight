@@ -1,6 +1,7 @@
 <%- include("../partials/header.ejs") %>
 <div class="container-fluid">
 <%- include("../partials/navbar.ejs") %>
+<%if(contractor.writtenReviews.length > 0){%>
     <div class="row" id="name-container">
         <h1 id="your-reviews-header">Your Reviews</h1>
     </div>
@@ -45,5 +46,20 @@
             <a href="/reviews" id="review-button">Find Contractors</a>
         </div>
     </div>
+    <%} else{%>
+    <div class="row" id="name-container">
+        <h1 id="your-reviews-header">Your Reviews</h1>
+    </div>
+    <div class="row" id="no-reviews">
+        <div class="no-reviews">
+            You do not have reviews yet! Start by looking for your contractor.
+        </div>
+    </div>
+    <div class="row" id="review-button-container">
+        <div id="review-anchor-container">
+            <a href="/reviews" id="review-button">Find Contractors</a>
+        </div>
+    </div>
+    <%}%>
 </div>
 <%- include("../partials/footer.ejs") %>

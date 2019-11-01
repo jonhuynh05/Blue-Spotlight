@@ -658,3 +658,9 @@ h1{
     display:none;
     visibility: hidden;
 }
+
+#no-reviews{
+    margin: 50px 0;
+    font-family: 'Raleway', sans-serif;
+
+}
