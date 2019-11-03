@@ -25,4 +25,4 @@ With Blue Spotlight, I aimed to create a solution to finding contractors. Oftent
 
 ## Technology
 
-Express | Node.js | JavaScript | MongoDB | Mongoose | HTML | CSS | Bootstrap
+Express | Node.js | JavaScript | MongoDB | Mongoose | EJS | CSS | Bootstrap
