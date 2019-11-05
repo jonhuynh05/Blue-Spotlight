@@ -9,7 +9,9 @@ const contractorController = require("./controller/contractor");
 const reviewerController = require("./controller/reviewer");
 const reviewController = require("./controller/review");
 const bcrypt = require("bcryptjs");
-const PORT = 5000;
+
+require("dotenv").config()
+const PORT = process.env.PORT;
 require("./db/db")
 
 
