@@ -2,6 +2,7 @@
 
 <img width="1440" alt="Screen Shot 2019-11-01 at 12 03 08 AM" src="https://user-images.githubusercontent.com/53237744/68008370-f0848f00-fc3b-11e9-9d9f-b1230f2a4394.png">
 
+Blue Spotlight: https://blue-spotlight.herokuapp.com/
 
 Blue Spotlight is a rating site geared specifically towards the contractor market. Contractors are able to upload their information to Blue Spotlight, and users are able to come to the site to rate contractors they've worked with, in addition to finding highly rated contractors in the field.
 
